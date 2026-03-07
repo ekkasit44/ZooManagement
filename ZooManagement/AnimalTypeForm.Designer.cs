@@ -2,15 +2,13 @@
 {
     partial class AnimalTypeForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        private System.Windows.Forms.DataGridView dgvAnimalType;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,20 +18,67 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "AnimalTypeForm";
+            dgvAnimalType = new DataGridView();
+            btnAdd = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimalType).BeginInit();
+            SuspendLayout();
+            // 
+            // dgvAnimalType
+            // 
+            dgvAnimalType.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAnimalType.Location = new Point(20, 20);
+            dgvAnimalType.Name = "dgvAnimalType";
+            dgvAnimalType.RowHeadersWidth = 51;
+            dgvAnimalType.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAnimalType.Size = new Size(600, 250);
+            dgvAnimalType.TabIndex = 0;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(20, 290);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(90, 35);
+            btnAdd.TabIndex = 1;
+            btnAdd.Text = "Add";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(130, 290);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(90, 35);
+            btnEdit.TabIndex = 2;
+            btnEdit.Text = "Edit";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(240, 290);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(90, 35);
+            btnDelete.TabIndex = 3;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // AnimalTypeForm
+            // 
+            ClientSize = new Size(650, 350);
+            Controls.Add(dgvAnimalType);
+            Controls.Add(btnAdd);
+            Controls.Add(btnEdit);
+            Controls.Add(btnDelete);
+            Name = "AnimalTypeForm";
+            Text = "Animal Type Management";
+            Load += AnimalTypeForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvAnimalType).EndInit();
+            ResumeLayout(false);
         }
-
-        #endregion
     }
 }
