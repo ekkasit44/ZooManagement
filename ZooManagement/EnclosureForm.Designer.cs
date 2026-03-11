@@ -2,38 +2,51 @@
 {
     partial class EnclosureForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        private System.Windows.Forms.DataGridView dgvEnclosure;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "EnclosureForm";
-        }
+            this.dgvEnclosure = new System.Windows.Forms.DataGridView();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
 
-        #endregion
+            this.SuspendLayout();
+
+            dgvEnclosure.Columns.Add("id", "Enclosure ID");
+            dgvEnclosure.Columns.Add("name", "Name");
+            dgvEnclosure.Columns.Add("location", "Location");
+
+            dgvEnclosure.Location = new System.Drawing.Point(20, 20);
+            dgvEnclosure.Size = new System.Drawing.Size(500, 250);
+            dgvEnclosure.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            btnAdd.Text = "Add";
+            btnAdd.Location = new System.Drawing.Point(20, 290);
+            btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+
+            btnEdit.Text = "Edit";
+            btnEdit.Location = new System.Drawing.Point(120, 290);
+            btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+
+            btnDelete.Text = "Delete";
+            btnDelete.Location = new System.Drawing.Point(220, 290);
+            btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+
+            this.Controls.Add(dgvEnclosure);
+            this.Controls.Add(btnAdd);
+            this.Controls.Add(btnEdit);
+            this.Controls.Add(btnDelete);
+
+            this.Text = "Enclosure Management";
+            this.Size = new System.Drawing.Size(560, 360);
+
+            this.ResumeLayout(false);
+        }
     }
 }

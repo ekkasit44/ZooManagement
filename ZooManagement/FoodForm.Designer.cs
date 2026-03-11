@@ -2,38 +2,48 @@
 {
     partial class FoodForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        private System.Windows.Forms.DataGridView dgvFood;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FoodForm";
-        }
+            dgvFood = new System.Windows.Forms.DataGridView();
+            btnAdd = new System.Windows.Forms.Button();
+            btnEdit = new System.Windows.Forms.Button();
+            btnDelete = new System.Windows.Forms.Button();
 
-        #endregion
+            dgvFood.Columns.Add("id", "Food ID");
+            dgvFood.Columns.Add("name", "Name");
+            dgvFood.Columns.Add("type", "Type");
+            dgvFood.Columns.Add("unit", "Unit");
+
+            dgvFood.Location = new System.Drawing.Point(20, 20);
+            dgvFood.Size = new System.Drawing.Size(500, 250);
+            dgvFood.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            btnAdd.Text = "Add";
+            btnAdd.Location = new System.Drawing.Point(20, 290);
+            btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+
+            btnEdit.Text = "Edit";
+            btnEdit.Location = new System.Drawing.Point(120, 290);
+            btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+
+            btnDelete.Text = "Delete";
+            btnDelete.Location = new System.Drawing.Point(220, 290);
+            btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+
+            this.Controls.Add(dgvFood);
+            this.Controls.Add(btnAdd);
+            this.Controls.Add(btnEdit);
+            this.Controls.Add(btnDelete);
+
+            this.Text = "Food Management";
+            this.Size = new System.Drawing.Size(560, 360);
+        }
     }
 }

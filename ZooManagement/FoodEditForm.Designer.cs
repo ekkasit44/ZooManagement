@@ -2,38 +2,72 @@
 {
     partial class FoodEditForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        private Label lblName;
+        private Label lblType;
+        private Label lblUnit;
 
-        #region Windows Form Designer generated code
+        private TextBox txtName;
+        private TextBox txtType;
+        private TextBox txtUnit;
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        private Button btnSave;
+        private Button btnCancel;
+
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FoodEditForm";
-        }
+            lblName = new Label();
+            lblType = new Label();
+            lblUnit = new Label();
 
-        #endregion
+            txtName = new TextBox();
+            txtType = new TextBox();
+            txtUnit = new TextBox();
+
+            btnSave = new Button();
+            btnCancel = new Button();
+
+            lblName.Text = "Food Name";
+            lblName.Location = new System.Drawing.Point(30, 30);
+
+            txtName.Location = new System.Drawing.Point(130, 30);
+            txtName.Width = 200;
+
+            lblType.Text = "Type";
+            lblType.Location = new System.Drawing.Point(30, 80);
+
+            txtType.Location = new System.Drawing.Point(130, 80);
+            txtType.Width = 200;
+
+            lblUnit.Text = "Unit";
+            lblUnit.Location = new System.Drawing.Point(30, 130);
+
+            txtUnit.Location = new System.Drawing.Point(130, 130);
+            txtUnit.Width = 200;
+
+            btnSave.Text = "Save";
+            btnSave.Location = new System.Drawing.Point(90, 190);
+            btnSave.Click += new System.EventHandler(this.btnSave_Click);
+
+            btnCancel.Text = "Cancel";
+            btnCancel.Location = new System.Drawing.Point(200, 190);
+            btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+
+            this.Controls.Add(lblName);
+            this.Controls.Add(txtName);
+
+            this.Controls.Add(lblType);
+            this.Controls.Add(txtType);
+
+            this.Controls.Add(lblUnit);
+            this.Controls.Add(txtUnit);
+
+            this.Controls.Add(btnSave);
+            this.Controls.Add(btnCancel);
+
+            this.Text = "Food";
+            this.Size = new System.Drawing.Size(400, 280);
+        }
     }
 }
