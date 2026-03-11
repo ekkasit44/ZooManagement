@@ -1,6 +1,6 @@
 namespace ZooManagement
 {
-    partial class SpeciesInfoEditForm
+    partial class SpeciesInfoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,72 +28,73 @@ namespace ZooManagement
         /// </summary>
         private void InitializeComponent()
         {
-            btnAllAnimals = new Button();
-            btnZoneAnimals = new Button();
-            btnFeed = new Button();
             dataGridView1 = new DataGridView();
+            btnAdd = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // btnAllAnimals
-            // 
-            btnAllAnimals.Location = new Point(54, 59);
-            btnAllAnimals.Name = "btnAllAnimals";
-            btnAllAnimals.Size = new Size(205, 101);
-            btnAllAnimals.TabIndex = 0;
-            btnAllAnimals.Text = "รายงานสัตว์ทั้งหมด";
-            btnAllAnimals.UseVisualStyleBackColor = true;
-            btnAllAnimals.Click += btnAllAnimals_Click;
-            // 
-            // btnZoneAnimals
-            // 
-            btnZoneAnimals.Location = new Point(54, 209);
-            btnZoneAnimals.Name = "btnZoneAnimals";
-            btnZoneAnimals.Size = new Size(205, 101);
-            btnZoneAnimals.TabIndex = 1;
-            btnZoneAnimals.Text = "รายงานสัตว์แยกตามโซน";
-            btnZoneAnimals.UseVisualStyleBackColor = true;
-            btnZoneAnimals.Click += btnZoneAnimals_Click;
-            // 
-            // btnFeed
-            // 
-            btnFeed.Location = new Point(54, 366);
-            btnFeed.Name = "btnFeed";
-            btnFeed.Size = new Size(205, 101);
-            btnFeed.TabIndex = 2;
-            btnFeed.Text = "รายงานการให้อาหารรายวัน";
-            btnFeed.UseVisualStyleBackColor = true;
-            btnFeed.Click += btnFeed_Click;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(336, 59);
+            dataGridView1.Location = new Point(96, 190);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(871, 408);
-            dataGridView1.TabIndex = 3;
+            dataGridView1.Size = new Size(1056, 458);
+            dataGridView1.TabIndex = 0;
             // 
-            // SpeciesInfoEditForm
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(96, 98);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(94, 29);
+            btnAdd.TabIndex = 1;
+            btnAdd.Text = "เพิ่ม";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(269, 98);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(94, 29);
+            btnEdit.TabIndex = 2;
+            btnEdit.Text = "เเก้ไข";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(430, 98);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 29);
+            btnDelete.TabIndex = 3;
+            btnDelete.Text = "ลบ";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // SpeciesInfoForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1287, 702);
+            ClientSize = new Size(1235, 684);
+            Controls.Add(btnDelete);
+            Controls.Add(btnEdit);
+            Controls.Add(btnAdd);
             Controls.Add(dataGridView1);
-            Controls.Add(btnFeed);
-            Controls.Add(btnZoneAnimals);
-            Controls.Add(btnAllAnimals);
-            Name = "SpeciesInfoEditForm";
-            Text = "SpeciesInfoEditForm";
+            Name = "SpeciesInfoForm";
+            Text = "SpeciesInfoForm";
+            Load += SpeciesInfoForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button btnAllAnimals;
-        private Button btnZoneAnimals;
-        private Button btnFeed;
         private DataGridView dataGridView1;
+        private Button btnAdd;
+        private Button btnEdit;
+        private Button btnDelete;
     }
 }
