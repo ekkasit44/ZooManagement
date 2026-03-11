@@ -29,69 +29,72 @@ namespace ZooManagement
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            btnLoad = new Button();
-            txtSearch = new TextBox();
-            btnSearch = new Button();
+            btnAdd = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(95, 213);
+            dataGridView1.Location = new Point(95, 189);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1106, 438);
             dataGridView1.TabIndex = 0;
             // 
-            // btnLoad
+            // btnAdd
             // 
-            btnLoad.Location = new Point(920, 112);
-            btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(94, 29);
-            btnLoad.TabIndex = 1;
-            btnLoad.Text = "ค้นหา";
-            btnLoad.UseVisualStyleBackColor = true;
-            btnLoad.Click += btnLoad_Click;
+            btnAdd.Location = new Point(95, 101);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(94, 29);
+            btnAdd.TabIndex = 1;
+            btnAdd.Text = "เพิ่ม";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
-            // txtSearch
+            // btnEdit
             // 
-            txtSearch.Location = new Point(126, 112);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(576, 27);
-            txtSearch.TabIndex = 2;
+            btnEdit.Location = new Point(301, 101);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(94, 29);
+            btnEdit.TabIndex = 2;
+            btnEdit.Text = "เเก้ไข";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
-            // btnSearch
+            // btnDelete
             // 
-            btnSearch.Location = new Point(762, 111);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(121, 29);
-            btnSearch.TabIndex = 3;
-            btnSearch.Text = "ตกลง";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
+            btnDelete.Location = new Point(519, 101);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 29);
+            btnDelete.TabIndex = 3;
+            btnDelete.Text = "ลบ";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // KeeperForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1272, 675);
-            Controls.Add(btnSearch);
-            Controls.Add(txtSearch);
-            Controls.Add(btnLoad);
+            Controls.Add(btnDelete);
+            Controls.Add(btnEdit);
+            Controls.Add(btnAdd);
             Controls.Add(dataGridView1);
             Name = "KeeperForm";
             Text = "KeeperForm";
+            Load += KeeperForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private DataGridView dataGridView1;
-        private Button btnLoad;
-        private TextBox txtSearch;
-        private Button btnSearch;
+        private Button btnAdd;
+        private Button btnEdit;
+        private Button btnDelete;
     }
 }
