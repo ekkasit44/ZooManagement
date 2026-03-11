@@ -1,6 +1,6 @@
-﻿namespace ZooManagement
+namespace ZooManagement
 {
-    partial class SpeciesInfoForm
+    partial class SpeciesInfoEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "SpeciesInfoForm";
+            btnAllAnimals = new Button();
+            btnZoneAnimals = new Button();
+            btnFeed = new Button();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            SuspendLayout();
+            // 
+            // btnAllAnimals
+            // 
+            btnAllAnimals.Location = new Point(54, 59);
+            btnAllAnimals.Name = "btnAllAnimals";
+            btnAllAnimals.Size = new Size(205, 101);
+            btnAllAnimals.TabIndex = 0;
+            btnAllAnimals.Text = "รายงานสัตว์ทั้งหมด";
+            btnAllAnimals.UseVisualStyleBackColor = true;
+            btnAllAnimals.Click += btnAllAnimals_Click;
+            // 
+            // btnZoneAnimals
+            // 
+            btnZoneAnimals.Location = new Point(54, 209);
+            btnZoneAnimals.Name = "btnZoneAnimals";
+            btnZoneAnimals.Size = new Size(205, 101);
+            btnZoneAnimals.TabIndex = 1;
+            btnZoneAnimals.Text = "รายงานสัตว์แยกตามโซน";
+            btnZoneAnimals.UseVisualStyleBackColor = true;
+            btnZoneAnimals.Click += btnZoneAnimals_Click;
+            // 
+            // btnFeed
+            // 
+            btnFeed.Location = new Point(54, 366);
+            btnFeed.Name = "btnFeed";
+            btnFeed.Size = new Size(205, 101);
+            btnFeed.TabIndex = 2;
+            btnFeed.Text = "รายงานการให้อาหารรายวัน";
+            btnFeed.UseVisualStyleBackColor = true;
+            btnFeed.Click += btnFeed_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(336, 59);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(871, 408);
+            dataGridView1.TabIndex = 3;
+            // 
+            // SpeciesInfoEditForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1287, 702);
+            Controls.Add(dataGridView1);
+            Controls.Add(btnFeed);
+            Controls.Add(btnZoneAnimals);
+            Controls.Add(btnAllAnimals);
+            Name = "SpeciesInfoEditForm";
+            Text = "SpeciesInfoEditForm";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnAllAnimals;
+        private Button btnZoneAnimals;
+        private Button btnFeed;
+        private DataGridView dataGridView1;
     }
 }
