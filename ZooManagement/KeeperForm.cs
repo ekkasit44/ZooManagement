@@ -12,14 +12,23 @@ namespace ZooManagement
 {
     public partial class KeeperForm : Form
     {
+
+
+        SqlConnection conn;
+
         public KeeperForm()
         {
             InitializeComponent();
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void KeeperForm_Load(object sender, EventArgs e)
         {
-            SqlConnection conn = connectDB.ConnectZooDB();
+            LoadData();
+        }
+
+        void LoadData()
+        {
+            conn = connectDB.ConnectZooDB();
 
             string sql = "SELECT * FROM keeper";
 
@@ -31,20 +40,63 @@ namespace ZooManagement
             dataGridView1.DataSource = dt;
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-			SqlConnection conn = connectDB.ConnectZooDB();
+            conn = connectDB.ConnectZooDB();
 
-			string sql = "SELECT * FROM keeper WHERE name LIKE @name";
+            string sql = "INSERT INTO keeper(name,phone,email) VALUES('New Name','000000000','email@test.com')";
 
-			SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            SqlCommand cmd = new SqlCommand(sql, conn);
 
-			da.SelectCommand.Parameters.AddWithValue("@name", "%" + txtSearch.Text + "%");
+            cmd.ExecuteNonQuery();
 
-			DataTable dt = new DataTable();
-			da.Fill(dt);
+            LoadData();
+        }
 
-			dataGridView1.DataSource = dt;
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            conn = connectDB.ConnectZooDB();
+
+            DataGridViewRow row = dataGridView1.CurrentRow;
+
+            string sql = @"UPDATE keeper 
+                           SET name=@name,
+                               phone=@phone,
+                               email=@email
+                           WHERE keeper_id=@id";
+
+            SqlCommand cmd = new SqlCommand(sql, conn);
+
+            cmd.Parameters.AddWithValue("@id", row.Cells["keeper_id"].Value);
+            cmd.Parameters.AddWithValue("@name", row.Cells["name"].Value);
+            cmd.Parameters.AddWithValue("@phone", row.Cells["phone"].Value);
+            cmd.Parameters.AddWithValue("@email", row.Cells["email"].Value);
+
+            cmd.ExecuteNonQuery();
+
+            MessageBox.Show("Edit Success");
+
+            LoadData();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+			conn = connectDB.ConnectZooDB();
+
+			DataGridViewRow row = dataGridView1.CurrentRow;
+
+			string sql = "DELETE FROM keeper WHERE keeper_id=@id";
+
+			SqlCommand cmd = new SqlCommand(sql, conn);
+
+			cmd.Parameters.AddWithValue("@id", row.Cells["keeper_id"].Value);
+
+			cmd.ExecuteNonQuery();
+
+			MessageBox.Show("Delete Success");
+
+			LoadData();
 		}
     }
 }
+
