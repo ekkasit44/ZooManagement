@@ -2,99 +2,112 @@ namespace ZooManagement
 {
     partial class SpeciesInfoEditForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
 
-        #region Windows Form Designer generated code
+        private System.Windows.Forms.TextBox txtCommonName;
+        private System.Windows.Forms.TextBox txtScientificName;
+        private System.Windows.Forms.TextBox txtHabitat;
+        private System.Windows.Forms.TextBox txtDiet;
+        private System.Windows.Forms.TextBox txtStatus;
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
+
         private void InitializeComponent()
         {
-            btnAllAnimals = new Button();
-            btnZoneAnimals = new Button();
-            btnFeed = new Button();
-            dataGridView1 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            SuspendLayout();
-            // 
-            // btnAllAnimals
-            // 
-            btnAllAnimals.Location = new Point(54, 59);
-            btnAllAnimals.Name = "btnAllAnimals";
-            btnAllAnimals.Size = new Size(205, 101);
-            btnAllAnimals.TabIndex = 0;
-            btnAllAnimals.Text = "รายงานสัตว์ทั้งหมด";
-            btnAllAnimals.UseVisualStyleBackColor = true;
-            btnAllAnimals.Click += btnAllAnimals_Click;
-            // 
-            // btnZoneAnimals
-            // 
-            btnZoneAnimals.Location = new Point(54, 209);
-            btnZoneAnimals.Name = "btnZoneAnimals";
-            btnZoneAnimals.Size = new Size(205, 101);
-            btnZoneAnimals.TabIndex = 1;
-            btnZoneAnimals.Text = "รายงานสัตว์แยกตามโซน";
-            btnZoneAnimals.UseVisualStyleBackColor = true;
-            btnZoneAnimals.Click += btnZoneAnimals_Click;
-            // 
-            // btnFeed
-            // 
-            btnFeed.Location = new Point(54, 366);
-            btnFeed.Name = "btnFeed";
-            btnFeed.Size = new Size(205, 101);
-            btnFeed.TabIndex = 2;
-            btnFeed.Text = "รายงานการให้อาหารรายวัน";
-            btnFeed.UseVisualStyleBackColor = true;
-            btnFeed.Click += btnFeed_Click;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(336, 59);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(871, 408);
-            dataGridView1.TabIndex = 3;
-            // 
-            // SpeciesInfoEditForm
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1287, 702);
-            Controls.Add(dataGridView1);
-            Controls.Add(btnFeed);
-            Controls.Add(btnZoneAnimals);
-            Controls.Add(btnAllAnimals);
-            Name = "SpeciesInfoEditForm";
-            Text = "SpeciesInfoEditForm";
-            Load += SpeciesInfoEditForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ResumeLayout(false);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+
+            this.txtCommonName = new System.Windows.Forms.TextBox();
+            this.txtScientificName = new System.Windows.Forms.TextBox();
+            this.txtHabitat = new System.Windows.Forms.TextBox();
+            this.txtDiet = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+
+            this.SuspendLayout();
+
+            // label1
+            this.label1.Text = "ชื่อทั่วไป";
+            this.label1.Location = new System.Drawing.Point(20, 20);
+
+            // txtCommonName
+            this.txtCommonName.Location = new System.Drawing.Point(150, 20);
+            this.txtCommonName.Size = new System.Drawing.Size(200, 23);
+
+            // label2
+            this.label2.Text = "ชื่อวิทยาศาสตร์";
+            this.label2.Location = new System.Drawing.Point(20, 60);
+
+            // txtScientificName
+            this.txtScientificName.Location = new System.Drawing.Point(150, 60);
+            this.txtScientificName.Size = new System.Drawing.Size(200, 23);
+
+            // label3
+            this.label3.Text = "ถิ่นที่อยู่";
+            this.label3.Location = new System.Drawing.Point(20, 100);
+
+            // txtHabitat
+            this.txtHabitat.Location = new System.Drawing.Point(150, 100);
+            this.txtHabitat.Size = new System.Drawing.Size(200, 23);
+
+            // label4
+            this.label4.Text = "อาหาร";
+            this.label4.Location = new System.Drawing.Point(20, 140);
+
+            // txtDiet
+            this.txtDiet.Location = new System.Drawing.Point(150, 140);
+            this.txtDiet.Size = new System.Drawing.Size(200, 23);
+
+            // label5
+            this.label5.Text = "สถานะอนุรักษ์";
+            this.label5.Location = new System.Drawing.Point(20, 180);
+
+            // txtStatus
+            this.txtStatus.Location = new System.Drawing.Point(150, 180);
+            this.txtStatus.Size = new System.Drawing.Size(200, 23);
+
+            // btnSave
+            this.btnSave.Text = "บันทึก";
+            this.btnSave.Location = new System.Drawing.Point(80, 230);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+
+            // btnCancel
+            this.btnCancel.Text = "ยกเลิก";
+            this.btnCancel.Location = new System.Drawing.Point(200, 230);
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+
+            // Form
+            this.ClientSize = new System.Drawing.Size(380, 300);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtCommonName);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtScientificName);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtHabitat);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtDiet);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtStatus);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnCancel);
+
+            this.Text = "เพิ่ม / แก้ไข ชนิดสัตว์";
+            this.Load += new System.EventHandler(this.SpeciesInfoEditForm_Load);
+
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
-
-        #endregion
-
-        private Button btnAllAnimals;
-        private Button btnZoneAnimals;
-        private Button btnFeed;
-        private DataGridView dataGridView1;
     }
 }

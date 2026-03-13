@@ -59,14 +59,14 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { mnuF, mnuAnimalform, mnuEfrm, mnuArrangeF });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(419, 28);
+            menuStrip1.Size = new Size(776, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // mnuF
             // 
-            mnuF.BackColor = Color.Blue;
+            mnuF.BackColor = Color.FromArgb(224, 224, 224);
             mnuF.DropDownItems.AddRange(new ToolStripItem[] { mnuMax, toolStripMenuItem1, mnuMin, toolStripMenuItem2, mnuExit, toolStripMenuItem3, mnuNomalF, mnuCloseF, mnuCloseAllF });
             mnuF.Name = "mnuF";
             mnuF.Size = new Size(55, 24);
@@ -75,63 +75,63 @@
             // mnuMax
             // 
             mnuMax.Name = "mnuMax";
-            mnuMax.Size = new Size(183, 26);
+            mnuMax.Size = new Size(224, 26);
             mnuMax.Text = "ขยาย ";
             mnuMax.Click += mnuMax_Click;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(180, 6);
+            toolStripMenuItem1.Size = new Size(221, 6);
             // 
             // mnuMin
             // 
             mnuMin.Name = "mnuMin";
-            mnuMin.Size = new Size(183, 26);
+            mnuMin.Size = new Size(224, 26);
             mnuMin.Text = "ย่อ  ";
             mnuMin.Click += mnuMin_Click;
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(180, 6);
+            toolStripMenuItem2.Size = new Size(221, 6);
             // 
             // mnuExit
             // 
             mnuExit.Name = "mnuExit";
-            mnuExit.Size = new Size(183, 26);
+            mnuExit.Size = new Size(224, 26);
             mnuExit.Text = "ปิดโปรแกรม ";
             mnuExit.Click += mnuExit_Click;
             // 
             // toolStripMenuItem3
             // 
             toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(180, 6);
+            toolStripMenuItem3.Size = new Size(221, 6);
             // 
             // mnuNomalF
             // 
             mnuNomalF.Name = "mnuNomalF";
-            mnuNomalF.Size = new Size(183, 26);
+            mnuNomalF.Size = new Size(224, 26);
             mnuNomalF.Text = "ปกติ";
             mnuNomalF.Click += mnuNomalF_Click;
             // 
             // mnuCloseF
             // 
             mnuCloseF.Name = "mnuCloseF";
-            mnuCloseF.Size = new Size(183, 26);
+            mnuCloseF.Size = new Size(224, 26);
             mnuCloseF.Text = "ปิดฟอร์ม";
             mnuCloseF.Click += mnuCloseF_Click;
             // 
             // mnuCloseAllF
             // 
             mnuCloseAllF.Name = "mnuCloseAllF";
-            mnuCloseAllF.Size = new Size(183, 26);
+            mnuCloseAllF.Size = new Size(224, 26);
             mnuCloseAllF.Text = "ปิดฟอร์มทั้งหมด";
             mnuCloseAllF.Click += mnuCloseAllF_Click;
             // 
             // mnuAnimalform
             // 
-            mnuAnimalform.BackColor = Color.FromArgb(128, 255, 128);
+            mnuAnimalform.BackColor = Color.FromArgb(224, 224, 224);
             mnuAnimalform.DropDownItems.AddRange(new ToolStripItem[] { mnuAnimal, mnuFood, mnuAnimalType, mnuSpeciesInfo });
             mnuAnimalform.Name = "mnuAnimalform";
             mnuAnimalform.Size = new Size(119, 24);
@@ -168,7 +168,7 @@
             // 
             // mnuEfrm
             // 
-            mnuEfrm.BackColor = Color.FromArgb(255, 255, 128);
+            mnuEfrm.BackColor = Color.FromArgb(224, 224, 224);
             mnuEfrm.DropDownItems.AddRange(new ToolStripItem[] { nmuEnclosure, nmuKeeper });
             mnuEfrm.Name = "mnuEfrm";
             mnuEfrm.Size = new Size(140, 24);
@@ -178,20 +178,20 @@
             // nmuEnclosure
             // 
             nmuEnclosure.Name = "nmuEnclosure";
-            nmuEnclosure.Size = new Size(203, 26);
+            nmuEnclosure.Size = new Size(224, 26);
             nmuEnclosure.Text = "ข้อมูลกรงสัตว์";
             nmuEnclosure.Click += mnuEnclosure_Click;
             // 
             // nmuKeeper
             // 
             nmuKeeper.Name = "nmuKeeper";
-            nmuKeeper.Size = new Size(203, 26);
+            nmuKeeper.Size = new Size(224, 26);
             nmuKeeper.Text = "ข้อมูลผู้ดูแลกรงสัตว์";
             nmuKeeper.Click += mnuKeeper_Click;
             // 
             // mnuArrangeF
             // 
-            mnuArrangeF.BackColor = Color.Blue;
+            mnuArrangeF.BackColor = Color.FromArgb(224, 224, 224);
             mnuArrangeF.DropDownItems.AddRange(new ToolStripItem[] { mnuVertical, mnuHorizontal });
             mnuArrangeF.Name = "mnuArrangeF";
             mnuArrangeF.Size = new Size(96, 24);
@@ -200,14 +200,14 @@
             // mnuVertical
             // 
             mnuVertical.Name = "mnuVertical";
-            mnuVertical.Size = new Size(141, 26);
+            mnuVertical.Size = new Size(224, 26);
             mnuVertical.Text = "แนวตั้ง";
             mnuVertical.Click += mnuVertical_Click;
             // 
             // mnuHorizontal
             // 
             mnuHorizontal.Name = "mnuHorizontal";
-            mnuHorizontal.Size = new Size(141, 26);
+            mnuHorizontal.Size = new Size(224, 26);
             mnuHorizontal.Text = "แนวนอน";
             mnuHorizontal.Click += mnuHorizontal_Click;
             // 
@@ -215,7 +215,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(419, 448);
+            ClientSize = new Size(776, 617);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;

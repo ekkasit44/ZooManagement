@@ -37,16 +37,17 @@ namespace ZooManagement
             // 
             // dataGridView1
             // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(95, 189);
+            dataGridView1.Location = new Point(29, 97);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1106, 438);
+            dataGridView1.Size = new Size(1202, 536);
             dataGridView1.TabIndex = 0;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(95, 101);
+            btnAdd.Location = new Point(29, 22);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(94, 29);
             btnAdd.TabIndex = 1;
@@ -56,7 +57,7 @@ namespace ZooManagement
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(301, 101);
+            btnEdit.Location = new Point(235, 22);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(94, 29);
             btnEdit.TabIndex = 2;
@@ -66,7 +67,7 @@ namespace ZooManagement
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(519, 101);
+            btnDelete.Location = new Point(453, 22);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(94, 29);
             btnDelete.TabIndex = 3;

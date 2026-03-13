@@ -12,54 +12,28 @@
         private void InitializeComponent()
         {
             dgvSchedule = new DataGridView();
-            btnAdd = new Button();
-            btnEdit = new Button();
-            btnDelete = new Button();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            btnAdd = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvSchedule).BeginInit();
             SuspendLayout();
             // 
             // dgvSchedule
             // 
+            dgvSchedule.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvSchedule.ColumnHeadersHeight = 29;
             dgvSchedule.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5 });
-            dgvSchedule.Location = new Point(20, 20);
+            dgvSchedule.Location = new Point(10, 41);
             dgvSchedule.Name = "dgvSchedule";
             dgvSchedule.RowHeadersWidth = 51;
             dgvSchedule.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSchedule.Size = new Size(650, 250);
+            dgvSchedule.Size = new Size(680, 297);
             dgvSchedule.TabIndex = 0;
-            // 
-            // btnAdd
-            // 
-            btnAdd.Location = new Point(20, 290);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 23);
-            btnAdd.TabIndex = 1;
-            btnAdd.Text = "Add";
-            btnAdd.Click += btnAdd_Click;
-            // 
-            // btnEdit
-            // 
-            btnEdit.Location = new Point(120, 290);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(75, 23);
-            btnEdit.TabIndex = 2;
-            btnEdit.Text = "Edit";
-            btnEdit.Click += btnEdit_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(220, 290);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
-            btnDelete.TabIndex = 3;
-            btnDelete.Text = "Delete";
-            btnDelete.Click += btnDelete_Click;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -96,9 +70,36 @@
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             dataGridViewTextBoxColumn5.Width = 125;
             // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(10, 12);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(75, 23);
+            btnAdd.TabIndex = 1;
+            btnAdd.Text = "เพิ่ม";
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(110, 12);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(75, 23);
+            btnEdit.TabIndex = 2;
+            btnEdit.Text = "แก้ไข";
+            btnEdit.Click += btnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(210, 12);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(75, 23);
+            btnDelete.TabIndex = 3;
+            btnDelete.Text = "ลบ";
+            btnDelete.Click += btnDelete_Click;
+            // 
             // FeedingScheduleForm
             // 
-            ClientSize = new Size(702, 313);
+            ClientSize = new Size(702, 350);
             Controls.Add(dgvSchedule);
             Controls.Add(btnAdd);
             Controls.Add(btnEdit);

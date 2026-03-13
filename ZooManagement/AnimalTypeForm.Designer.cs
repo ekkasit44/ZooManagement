@@ -29,47 +29,48 @@
             // 
             // dgvAnimalType
             // 
+            dgvAnimalType.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvAnimalType.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAnimalType.Location = new Point(20, 20);
+            dgvAnimalType.Location = new Point(12, 83);
             dgvAnimalType.Name = "dgvAnimalType";
             dgvAnimalType.RowHeadersWidth = 51;
             dgvAnimalType.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAnimalType.Size = new Size(600, 250);
+            dgvAnimalType.Size = new Size(576, 361);
             dgvAnimalType.TabIndex = 0;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(20, 290);
+            btnAdd.Location = new Point(12, 12);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(90, 35);
             btnAdd.TabIndex = 1;
-            btnAdd.Text = "Add";
+            btnAdd.Text = "เพิ่ม";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(130, 290);
+            btnEdit.Location = new Point(122, 12);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(90, 35);
             btnEdit.TabIndex = 2;
-            btnEdit.Text = "Edit";
+            btnEdit.Text = "แก้ไข";
             btnEdit.UseVisualStyleBackColor = true;
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(240, 290);
+            btnDelete.Location = new Point(232, 12);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(90, 35);
             btnDelete.TabIndex = 3;
-            btnDelete.Text = "Delete";
+            btnDelete.Text = "ลบ";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
             // AnimalTypeForm
             // 
-            ClientSize = new Size(650, 350);
+            ClientSize = new Size(600, 456);
             Controls.Add(dgvAnimalType);
             Controls.Add(btnAdd);
             Controls.Add(btnEdit);

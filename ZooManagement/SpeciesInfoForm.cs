@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
@@ -11,11 +7,6 @@ namespace ZooManagement
 {
     public partial class SpeciesInfoForm : Form
     {
-
-        SqlConnection conn;
-
-
-
         public SpeciesInfoForm()
         {
             InitializeComponent();
@@ -23,79 +14,100 @@ namespace ZooManagement
 
         private void SpeciesInfoForm_Load(object sender, EventArgs e)
         {
-            LoadData();
-
+            dgvSpecies.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            LoadSpecies();
         }
-        void LoadData()
+
+        private void LoadSpecies()
         {
-            conn = connectDB.ConnectZooDB();
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string sql = @"SELECT 
+                               species_info_id AS ID,
+                               common_name AS ชื่อทั่วไป,
+                               scientific_name AS ชื่อวิทยาศาสตร์,
+                               habitat AS ถิ่นที่อยู่,
+                               diet AS อาหาร,
+                               conservation_status AS สถานะอนุรักษ์
+                               FROM SpeciesInfo";
 
-            string sql = "SELECT * FROM speciesinfo";
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                dgvSpecies.DataSource = dt;
+            }
+        }
 
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string sql = @"SELECT 
+                               species_info_id AS ID,
+                               common_name AS ชื่อทั่วไป,
+                               scientific_name AS ชื่อวิทยาศาสตร์,
+                               habitat AS ถิ่นที่อยู่,
+                               diet AS อาหาร,
+                               conservation_status AS สถานะอนุรักษ์
+                               FROM SpeciesInfo
+                               WHERE common_name LIKE @name";
 
-            dataGridView1.DataSource = dt;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", "%" + txtSearch.Text + "%");
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvSpecies.DataSource = dt;
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-			conn = connectDB.ConnectZooDB();
-
-			string sql = "INSERT INTO speciesinfo(name,scientific_name,conservation_status) VALUES('New Animal','Scientific Name','Status')";
-
-			SqlCommand cmd = new SqlCommand(sql, conn);
-
-			cmd.ExecuteNonQuery();
-
-			LoadData();
-		}
+            SpeciesInfoEditForm frm = new SpeciesInfoEditForm();
+            frm.ShowDialog();
+            LoadSpecies();
+        }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-			conn = connectDB.ConnectZooDB();
+            if (dgvSpecies.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("กรุณาเลือกรายการ");
+                return;
+            }
 
-			DataGridViewRow row = dataGridView1.CurrentRow;
+            SpeciesInfoEditForm frm = new SpeciesInfoEditForm();
 
-			string sql = @"UPDATE speciesinfo 
-                           SET name=@name,
-                               scientific_name=@scientific,
-                               conservation_status=@status
-                           WHERE species_id=@id";
+            frm.SpeciesID = dgvSpecies.SelectedRows[0].Cells[0].Value.ToString();
+            frm.CommonName = dgvSpecies.SelectedRows[0].Cells[1].Value.ToString();
+            frm.ScientificName = dgvSpecies.SelectedRows[0].Cells[2].Value.ToString();
+            frm.Habitat = dgvSpecies.SelectedRows[0].Cells[3].Value.ToString();
+            frm.Diet = dgvSpecies.SelectedRows[0].Cells[4].Value.ToString();
+            frm.Status = dgvSpecies.SelectedRows[0].Cells[5].Value.ToString();
 
-			SqlCommand cmd = new SqlCommand(sql, conn);
-
-			cmd.Parameters.AddWithValue("@id", row.Cells["species_id"].Value);
-			cmd.Parameters.AddWithValue("@name", row.Cells["name"].Value);
-			cmd.Parameters.AddWithValue("@scientific", row.Cells["scientific_name"].Value);
-			cmd.Parameters.AddWithValue("@status", row.Cells["conservation_status"].Value);
-
-			cmd.ExecuteNonQuery();
-
-			MessageBox.Show("Edit Success");
-
-			LoadData();
-		}
+            frm.ShowDialog();
+            LoadSpecies();
+        }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-			conn = connectDB.ConnectZooDB();
+            if (dgvSpecies.SelectedRows.Count == 0)
+                return;
 
-			DataGridViewRow row = dataGridView1.CurrentRow;
+            string id = dgvSpecies.SelectedRows[0].Cells[0].Value.ToString();
 
-			string sql = "DELETE FROM speciesinfo WHERE species_id=@id";
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string sql = "DELETE FROM SpeciesInfo WHERE species_info_id=@id";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
 
-			SqlCommand cmd = new SqlCommand(sql, conn);
-
-			cmd.Parameters.AddWithValue("@id", row.Cells["species_id"].Value);
-
-			cmd.ExecuteNonQuery();
-
-			MessageBox.Show("Delete Success");
-
-			LoadData();
-		}
+            LoadSpecies();
+        }
     }
 }

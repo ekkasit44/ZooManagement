@@ -26,68 +26,96 @@
 
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.cbGender = new System.Windows.Forms.ComboBox();
-            this.dtBirth = new System.Windows.Forms.DateTimePicker();
-
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-
-            this.SuspendLayout();
-
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            txtName = new TextBox();
+            cbGender = new ComboBox();
+            dtBirth = new DateTimePicker();
+            btnSave = new Button();
+            btnCancel = new Button();
+            SuspendLayout();
+            // 
             // label1
-            this.label1.Text = "Animal Name";
-            this.label1.Location = new System.Drawing.Point(30, 30);
-
-            // txtName
-            this.txtName.Location = new System.Drawing.Point(150, 30);
-            this.txtName.Size = new System.Drawing.Size(200, 22);
-
+            // 
+            label1.Location = new Point(30, 30);
+            label1.Name = "label1";
+            label1.Size = new Size(100, 23);
+            label1.TabIndex = 0;
+            label1.Text = "ชื่อสัตว์";
+            // 
             // label2
-            this.label2.Text = "Gender";
-            this.label2.Location = new System.Drawing.Point(30, 70);
-
-            // cbGender
-            this.cbGender.Location = new System.Drawing.Point(150, 70);
-            this.cbGender.Items.AddRange(new object[] { "Male", "Female" });
-
+            // 
+            label2.Location = new Point(30, 70);
+            label2.Name = "label2";
+            label2.Size = new Size(100, 23);
+            label2.TabIndex = 2;
+            label2.Text = "เพศ";
+            // 
             // label3
-            this.label3.Text = "Birth Date";
-            this.label3.Location = new System.Drawing.Point(30, 110);
-
+            // 
+            label3.Location = new Point(30, 110);
+            label3.Name = "label3";
+            label3.Size = new Size(100, 23);
+            label3.TabIndex = 4;
+            label3.Text = "วันเกิด";
+            // 
+            // txtName
+            // 
+            txtName.Location = new Point(127, 30);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(223, 27);
+            txtName.TabIndex = 1;
+            // 
+            // cbGender
+            // 
+            cbGender.Items.AddRange(new object[] { "Male", "Female" });
+            cbGender.Location = new Point(150, 70);
+            cbGender.Name = "cbGender";
+            cbGender.Size = new Size(121, 28);
+            cbGender.TabIndex = 3;
+            // 
             // dtBirth
-            this.dtBirth.Location = new System.Drawing.Point(150, 110);
-
+            // 
+            dtBirth.Location = new Point(150, 110);
+            dtBirth.Name = "dtBirth";
+            dtBirth.Size = new Size(200, 27);
+            dtBirth.TabIndex = 5;
+            // 
             // btnSave
-            this.btnSave.Text = "Save";
-            this.btnSave.Location = new System.Drawing.Point(150, 160);
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-
+            // 
+            btnSave.Location = new Point(150, 160);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(85, 40);
+            btnSave.TabIndex = 6;
+            btnSave.Text = "บันทึก";
+            btnSave.Click += btnSave_Click;
+            // 
             // btnCancel
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.Location = new System.Drawing.Point(250, 160);
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-
+            // 
+            btnCancel.Location = new Point(250, 160);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(100, 40);
+            btnCancel.TabIndex = 7;
+            btnCancel.Text = "ยกเลิก";
+            btnCancel.Click += btnCancel_Click;
+            // 
             // AnimalEditForm
-            this.ClientSize = new System.Drawing.Size(400, 230);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cbGender);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.dtBirth);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnCancel);
-
-            this.Text = "Edit Animal";
-            this.Load += new System.EventHandler(this.AnimalEditForm_Load);
-
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            ClientSize = new Size(400, 230);
+            Controls.Add(label1);
+            Controls.Add(txtName);
+            Controls.Add(label2);
+            Controls.Add(cbGender);
+            Controls.Add(label3);
+            Controls.Add(dtBirth);
+            Controls.Add(btnSave);
+            Controls.Add(btnCancel);
+            Name = "AnimalEditForm";
+            Text = "Edit Animal";
+            Load += AnimalEditForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
 

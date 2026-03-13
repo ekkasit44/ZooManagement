@@ -16,6 +16,8 @@ namespace ZooManagement
         private void AnimalForm_Load(object sender, EventArgs e)
         {
             LoadAnimal();
+            dgvAnimal.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
         }
 
         // โหลดข้อมูลสัตว์

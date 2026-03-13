@@ -11,42 +11,91 @@
 
         private void InitializeComponent()
         {
-            this.dgvEnclosure = new System.Windows.Forms.DataGridView();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-
-            this.SuspendLayout();
-
-            dgvEnclosure.Columns.Add("id", "Enclosure ID");
-            dgvEnclosure.Columns.Add("name", "Name");
-            dgvEnclosure.Columns.Add("location", "Location");
-
-            dgvEnclosure.Location = new System.Drawing.Point(20, 20);
-            dgvEnclosure.Size = new System.Drawing.Size(500, 250);
+            dgvEnclosure = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            btnAdd = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvEnclosure).BeginInit();
+            SuspendLayout();
+            // 
+            // dgvEnclosure
+            // 
+            dgvEnclosure.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvEnclosure.ColumnHeadersHeight = 29;
+            dgvEnclosure.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
+            dgvEnclosure.Location = new Point(11, 59);
+            dgvEnclosure.Name = "dgvEnclosure";
+            dgvEnclosure.RowHeadersWidth = 51;
             dgvEnclosure.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            btnAdd.Text = "Add";
-            btnAdd.Location = new System.Drawing.Point(20, 290);
-            btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-
-            btnEdit.Text = "Edit";
-            btnEdit.Location = new System.Drawing.Point(120, 290);
-            btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-
-            btnDelete.Text = "Delete";
-            btnDelete.Location = new System.Drawing.Point(220, 290);
-            btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-
-            this.Controls.Add(dgvEnclosure);
-            this.Controls.Add(btnAdd);
-            this.Controls.Add(btnEdit);
-            this.Controls.Add(btnDelete);
-
-            this.Text = "Enclosure Management";
-            this.Size = new System.Drawing.Size(560, 360);
-
-            this.ResumeLayout(false);
+            dgvEnclosure.Size = new Size(539, 264);
+            dgvEnclosure.TabIndex = 0;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.HeaderText = "Enclosure ID";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.HeaderText = "Name";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.HeaderText = "Location";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Width = 125;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(11, 12);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(75, 23);
+            btnAdd.TabIndex = 1;
+            btnAdd.Text = "เพิ่ม";
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(111, 12);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(75, 23);
+            btnEdit.TabIndex = 2;
+            btnEdit.Text = "แก้ไข";
+            btnEdit.Click += btnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(211, 12);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(75, 23);
+            btnDelete.TabIndex = 3;
+            btnDelete.Text = "ลบ";
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // EnclosureForm
+            // 
+            ClientSize = new Size(562, 335);
+            Controls.Add(dgvEnclosure);
+            Controls.Add(btnAdd);
+            Controls.Add(btnEdit);
+            Controls.Add(btnDelete);
+            Name = "EnclosureForm";
+            Text = "Enclosure Management";
+            ((System.ComponentModel.ISupportInitialize)dgvEnclosure).EndInit();
+            ResumeLayout(false);
         }
+
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
     }
 }

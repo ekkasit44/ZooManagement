@@ -27,7 +27,7 @@
             lblName.Name = "lblName";
             lblName.Size = new Size(100, 23);
             lblName.TabIndex = 0;
-            lblName.Text = "Name";
+            lblName.Text = "ชื่อ";
             // 
             // lblLocation
             // 
@@ -35,7 +35,7 @@
             lblLocation.Name = "lblLocation";
             lblLocation.Size = new Size(100, 23);
             lblLocation.TabIndex = 2;
-            lblLocation.Text = "Location";
+            lblLocation.Text = "โซนที่ตั้ง";
             // 
             // txtName
             // 
@@ -57,7 +57,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 23);
             btnSave.TabIndex = 4;
-            btnSave.Text = "Save";
+            btnSave.Text = "บันทึก";
             btnSave.Click += btnSave_Click;
             // 
             // btnCancel
@@ -66,7 +66,7 @@
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 23);
             btnCancel.TabIndex = 5;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "ยกเลิก";
             btnCancel.Click += btnCancel_Click;
             // 
             // EnclosureEditForm
