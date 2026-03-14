@@ -1,10 +1,59 @@
-﻿namespace ZooManagement
+namespace ZooManagement
 {
     public partial class MDIForm : Form
     {
         public MDIForm()
         {
             InitializeComponent();
+        }
+        private void ToolStripSearchButton_Click(object sender, EventArgs e)
+        {
+            ForwardSearchToActiveChild();
+        }
+
+        private void ToolStripSearchText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ForwardSearchToActiveChild();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void ForwardSearchToActiveChild()
+        {
+            try
+            {
+                var txt = toolStripSearchText.Text.Trim();
+                if (string.IsNullOrEmpty(txt)) return;
+
+                if (this.ActiveMdiChild is ISearchable searchable)
+                {
+                    searchable.Search(txt);
+                }
+                else
+                {
+                    // optionally broadcast to all children that support ISearchable
+                    foreach (Form child in this.MdiChildren)
+                    {
+                        if (child is ISearchable s)
+                        {
+                            s.Search(txt);
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private void MDIForm_Resize(object sender, EventArgs e)
+        {
+            // Make active MDI child fill the client area below the menu/tool strips
+            foreach (Form child in this.MdiChildren)
+            {
+                child.WindowState = FormWindowState.Maximized;
+            }
         }
         private void mnuMax_Click(object sender, EventArgs e)
         {
@@ -69,18 +118,56 @@
 
 
 
-        private void mnuAnimalform_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        
 
         private void mnuAnimalType_Click(object sender, EventArgs e)
         {
             AnimalTypeForm fE = new AnimalTypeForm();
             fE.MdiParent = this;
             fE.Show();
+        }
+
+        // Toolstrip button handlers
+        private void toolBtnAnimal_Click(object sender, EventArgs e)
+        {
+            mnuAnimal_Click(sender, e);
+        }
+        private void toolBtnAnimalType_Click(object sender, EventArgs e)
+        {
+            mnuAnimalType_Click(sender, e);
+        }
+        private void toolBtnSpecies_Click(object sender, EventArgs e)
+        {
+            mnuSpeciesInfo_Click(sender, e);
+        }
+        private void toolBtnEnclosure_Click(object sender, EventArgs e)
+        {
+            mnuEnclosure_Click(sender, e);
+        }
+        private void toolBtnKeeper_Click(object sender, EventArgs e)
+        {
+            mnuKeeper_Click(sender, e);
+        }
+        private void toolBtnFood_Click(object sender, EventArgs e)
+        {
+            mnuFood_Click(sender, e);
+        }
+        private void toolBtnFeeding_Click(object sender, EventArgs e)
+        {
+            mnuFD_Click(sender, e);
+        }
+        private void toolBtnRefresh_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild is Form f)
+            {
+                // try to invoke a Refresh button if exists
+                var mi = f.GetType().GetMethod("btnRefresh_Click", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
+                if (mi != null)
+                {
+                    mi.Invoke(f, new object[] { null, EventArgs.Empty });
+                }
+            }
         }
 
         private void mnuSpeciesInfo_Click(object sender, EventArgs e)
@@ -106,8 +193,7 @@
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            //ShowMenuManager();
-            //ShowMenuSale();
+
             ShowMenuStart();
         }
 
@@ -125,12 +211,9 @@
 
 
 
-        private void mnuEfrm_Click(object sender, EventArgs e)
-        {
+       
 
-        }
 
-      
         private void mnuFood_Click(object sender, EventArgs e)
         {
             FoodForm fFood = new FoodForm();
@@ -138,13 +221,12 @@
             fFood.Show();
         }
 
-       
+
         private void ShowMenuStart()
         {
-           
+
             mnuF.Enabled = true;
-            mnuAnimalform.Enabled = true;
-            mnuEfrm.Enabled = true;
+           
             mnuArrangeF.Enabled = true;
         }
 
@@ -159,10 +241,26 @@
                     return;
                 }
             }
-            
+
             AnimalForm fP = new AnimalForm();
             fP.MdiParent = this;
             fP.Show();
+
+            
+        }
+
+        private void mnuFD_Click(object sender, EventArgs e)
+        {
+            FeedingScheduleForm mnuFD = new FeedingScheduleForm();
+            mnuFD.MdiParent = this;
+            mnuFD.Show();
+        }
+
+        private void ขอมลอาหารToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FoodForm mnuFood = new FoodForm();
+            mnuFood.MdiParent = this;
+            mnuFood.Show();
         }
     }
 }
