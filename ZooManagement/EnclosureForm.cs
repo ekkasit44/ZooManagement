@@ -1,84 +1,298 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient; // ใช้ Namespace ตามโค้ดของคุณ
+using System;
+using System.Data;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
 
 namespace ZooManagement
 {
     public partial class EnclosureForm : Form
     {
+        // ตัวแปรเก็บข้อมูลกรงที่ถูกเลือก
+        private string selectedEnclosureId = "";
+        private string selectedEnclosureName = "";
+        private string selectedEnclosureLocation = "";
+
+        // ตัวแปรเก็บ ID อื่นๆ
+        private string selectedAnimalId = "";
+        private string selectedFeedingId = "";
+
         public EnclosureForm()
         {
             InitializeComponent();
-            this.Load += EnclosureForm_Load;
         }
 
         private void EnclosureForm_Load(object sender, EventArgs e)
         {
-            LoadEnclosure();
+            LoadEnclosures();
         }
 
-        private void LoadEnclosure()
+        // --- 1. โหลดข้อมูลกรงทั้งหมด ---
+        private void LoadEnclosures()
         {
-            dgvEnclosure.Rows.Clear();
-
             using (SqlConnection conn = connectDB.ConnectZooDB())
             {
-                string sql = "SELECT enclosure_id,name,location FROM Enclosure";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    dgvEnclosure.Rows.Add(
-                        reader["enclosure_id"].ToString(),
-                        reader["name"].ToString(),
-                        reader["location"].ToString()
-                    );
-                }
+                string query = "SELECT enclosure_id, name, location FROM Enclosure";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvEnclosures.DataSource = dt;
+                SetEnclosureGridHeaders();
             }
         }
 
+        // --- 2. คลิกกรง -> เก็บข้อมูลกรงเพื่อรอส่งไปหน้า Edit และแสดงสัตว์ ---
+        private void dgvEnclosures_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvEnclosures.Rows[e.RowIndex];
+
+                // เก็บข้อมูลกรงไว้ใช้ตอนกดปุ่มแก้ไข
+                selectedEnclosureId = row.Cells["enclosure_id"].Value.ToString();
+                selectedEnclosureName = row.Cells["name"].Value.ToString();
+                selectedEnclosureLocation = row.Cells["location"].Value.ToString();
+
+                // โหลดสัตว์ และล้างตารางอาหารเพราะเพิ่งเปลี่ยนกรง
+                LoadAnimalsByEnclosure(selectedEnclosureId);
+                dgvFeeding.DataSource = null;
+                selectedAnimalId = "";
+                selectedFeedingId = "";
+            }
+        }
+
+        private void LoadAnimalsByEnclosure(string enclosureId, string searchTerm = "")
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string query = "SELECT animal_id, name, gender FROM Animal WHERE enclosure_id = @enclosureId";
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    query += " AND name LIKE @searchTerm";
+                }
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@enclosureId", enclosureId);
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
+                }
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvAnimals.DataSource = dt;
+                SetAnimalGridHeaders();
+            }
+        }
+
+        // --- 3. คลิกสัตว์ -> แสดงตารางให้อาหาร ---
+        private void dgvAnimals_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                selectedAnimalId = dgvAnimals.Rows[e.RowIndex].Cells["animal_id"].Value.ToString();
+                LoadFeedingSchedule(selectedAnimalId);
+            }
+        }
+
+        private void LoadFeedingSchedule(string animalId)
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string query = @"SELECT fs.feeding_id, f.name AS food_name, fs.amount, fs.feeding_date, fs.feeding_time 
+                                 FROM FeedingSchedule fs
+                                 LEFT JOIN Food f ON fs.food_id = f.food_id
+                                 WHERE fs.animal_id = @animalId";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@animalId", animalId);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvFeeding.DataSource = dt;
+                SetFeedingGridHeaders();
+            }
+        }
+
+        private void dgvFeeding_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                selectedFeedingId = dgvFeeding.Rows[e.RowIndex].Cells["feeding_id"].Value.ToString();
+            }
+        }
+
+        // --- 4. ปุ่มค้นหาสัตว์ ---
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(selectedEnclosureId))
+            {
+                MessageBox.Show("กรุณาเลือกกรงก่อนทำการค้นหาสัตว์", "แจ้งเตือน");
+                return;
+            }
+            LoadAnimalsByEnclosure(selectedEnclosureId, txtSearch.Text);
+        }
+
+        // --- 5. ปุ่ม เพิ่ม/แก้ไข/ลบ ข้อมูล "กรง (Enclosure)" ---
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            // สร้างออบเจกต์ฟอร์มของคุณ
             EnclosureEditForm frm = new EnclosureEditForm();
+
+            // ไม่ต้องใส่ ID เพราะเป็นการเพิ่มใหม่ (ID ปล่อยเป็นค่าว่างตามเงื่อนไข if ของคุณ)
+            frm.EnclosureID = "";
+            frm.Name = "";
+            frm.LocationName = "";
+
+            // เปิดหน้าต่าง
             frm.ShowDialog();
-            LoadEnclosure();
+
+            // โหลดตารางกรงใหม่หลังจากปิดหน้าต่างแก้ไข
+            LoadEnclosures();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvEnclosure.SelectedRows.Count == 0)
+            if (string.IsNullOrEmpty(selectedEnclosureId))
             {
-                MessageBox.Show("Please select row");
+                MessageBox.Show("กรุณาเลือกกรงที่ต้องการแก้ไขจากตารางฝั่งซ้าย", "แจ้งเตือน");
                 return;
             }
 
             EnclosureEditForm frm = new EnclosureEditForm();
 
-            frm.EnclosureID = dgvEnclosure.SelectedRows[0].Cells[0].Value.ToString();
-            frm.Name = dgvEnclosure.SelectedRows[0].Cells[1].Value.ToString();
-            frm.LocationName = dgvEnclosure.SelectedRows[0].Cells[2].Value.ToString();
+            // ส่งค่า ID, ชื่อ, สถานที่ ของกรงที่เลือกลงไปในตัวแปรของฟอร์ม
+            frm.EnclosureID = selectedEnclosureId;
+            frm.Name = selectedEnclosureName;
+            frm.LocationName = selectedEnclosureLocation;
 
             frm.ShowDialog();
-            LoadEnclosure();
+            LoadEnclosures(); // อัปเดตตาราง
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvEnclosure.SelectedRows.Count == 0)
-                return;
-
-            string id = dgvEnclosure.SelectedRows[0].Cells[0].Value.ToString();
-
-            using (SqlConnection conn = connectDB.ConnectZooDB())
+            if (string.IsNullOrEmpty(selectedEnclosureId))
             {
-                string sql = "DELETE FROM Enclosure WHERE enclosure_id=@id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.ExecuteNonQuery();
+                MessageBox.Show("กรุณาเลือกกรงที่ต้องการลบ", "แจ้งเตือน");
+                return;
             }
 
-            LoadEnclosure();
+            if (MessageBox.Show("คุณแน่ใจหรือไม่ที่จะลบกรงนี้?", "ยืนยันการลบ", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                using (SqlConnection conn = connectDB.ConnectZooDB())
+                {
+                    // ลบข้อมูลกรงจากฐานข้อมูล
+                    string query = "DELETE FROM Enclosure WHERE enclosure_id = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", selectedEnclosureId);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                LoadEnclosures(); // อัปเดตตารางกรง
+                dgvAnimals.DataSource = null; // ล้างตารางสัตว์
+                selectedEnclosureId = "";
+            }
+        }
+
+        // --- 6. ปุ่ม แสดงทั้งหมด (lblAll) ---
+        private void lblAll_Click(object sender, EventArgs e)
+        {
+            // โหลดข้อมูลทั้งหมดในทั้ง 3 ตาราง
+            LoadEnclosures();
+            LoadAllAnimals();
+            LoadAllFeeding();
+
+            // เคลียร์ตัวแปรเลือกไว้เพื่อหลีกเลี่ยงการกระทำผิดพลาด
+            selectedEnclosureId = "";
+            selectedEnclosureName = "";
+            selectedEnclosureLocation = "";
+            selectedAnimalId = "";
+            selectedFeedingId = "";
+        }
+
+        private void LoadAllAnimals(string searchTerm = "")
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string query = "SELECT animal_id, name, gender, enclosure_id FROM Animal";
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    query += " WHERE name LIKE @searchTerm";
+                }
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
+                }
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvAnimals.DataSource = dt;
+                SetAnimalGridHeaders();
+            }
+        }
+
+        private void LoadAllFeeding(string searchTerm = "")
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string query = @"SELECT fs.feeding_id, f.name AS food_name, fs.amount, fs.feeding_date, fs.feeding_time, fs.animal_id
+                                 FROM FeedingSchedule fs
+                                 LEFT JOIN Food f ON fs.food_id = f.food_id";
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    query += " WHERE f.name LIKE @searchTerm OR fs.animal_id LIKE @searchTerm";
+                }
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
+                }
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvFeeding.DataSource = dt;
+                SetFeedingGridHeaders();
+            }
+        }
+
+        // --- Helpers: ตั้งหัวคอลัมน์เป็นภาษาไทย ---
+        private void SetEnclosureGridHeaders()
+        {
+            if (dgvEnclosures.Columns == null) return;
+            if (dgvEnclosures.Columns.Contains("enclosure_id")) dgvEnclosures.Columns["enclosure_id"].HeaderText = "รหัสกรง";
+            if (dgvEnclosures.Columns.Contains("name")) dgvEnclosures.Columns["name"].HeaderText = "ชื่อกรง";
+            if (dgvEnclosures.Columns.Contains("location")) dgvEnclosures.Columns["location"].HeaderText = "สถานที่";
+        }
+
+        private void SetAnimalGridHeaders()
+        {
+            if (dgvAnimals.Columns == null) return;
+            if (dgvAnimals.Columns.Contains("animal_id")) dgvAnimals.Columns["animal_id"].HeaderText = "รหัสสัตว์";
+            if (dgvAnimals.Columns.Contains("name")) dgvAnimals.Columns["name"].HeaderText = "ชื่อสัตว์";
+            if (dgvAnimals.Columns.Contains("gender")) dgvAnimals.Columns["gender"].HeaderText = "เพศ";
+            if (dgvAnimals.Columns.Contains("enclosure_id")) dgvAnimals.Columns["enclosure_id"].HeaderText = "รหัสกรง";
+        }
+
+        private void SetFeedingGridHeaders()
+        {
+            if (dgvFeeding.Columns == null) return;
+            if (dgvFeeding.Columns.Contains("feeding_id")) dgvFeeding.Columns["feeding_id"].HeaderText = "รหัสให้อาหาร";
+            if (dgvFeeding.Columns.Contains("food_name")) dgvFeeding.Columns["food_name"].HeaderText = "อาหาร";
+            if (dgvFeeding.Columns.Contains("amount")) dgvFeeding.Columns["amount"].HeaderText = "ปริมาณ";
+            if (dgvFeeding.Columns.Contains("feeding_date")) dgvFeeding.Columns["feeding_date"].HeaderText = "วันที่";
+            if (dgvFeeding.Columns.Contains("feeding_time")) dgvFeeding.Columns["feeding_time"].HeaderText = "เวลา";
+            if (dgvFeeding.Columns.Contains("animal_id")) dgvFeeding.Columns["animal_id"].HeaderText = "รหัสสัตว์";
         }
     }
 }

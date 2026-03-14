@@ -4,98 +4,188 @@
     {
         private System.ComponentModel.IContainer components = null;
 
-        private System.Windows.Forms.DataGridView dgvEnclosure;
+        // ประกาศเครื่องมือ
+        private System.Windows.Forms.DataGridView dgvEnclosures;
+        private System.Windows.Forms.DataGridView dgvAnimals;
+        private System.Windows.Forms.DataGridView dgvFeeding;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label lblEnclosures;
+        private System.Windows.Forms.Label lblAnimals;
+        private System.Windows.Forms.Label lblFeeding;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         private void InitializeComponent()
         {
-            dgvEnclosure = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dgvEnclosures = new DataGridView();
+            dgvAnimals = new DataGridView();
+            dgvFeeding = new DataGridView();
+            txtSearch = new TextBox();
+            btnSearch = new Button();
             btnAdd = new Button();
             btnEdit = new Button();
             btnDelete = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvEnclosure).BeginInit();
+            lblEnclosures = new Label();
+            lblAnimals = new Label();
+            lblFeeding = new Label();
+            lblAll = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvEnclosures).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvFeeding).BeginInit();
             SuspendLayout();
             // 
-            // dgvEnclosure
+            // dgvEnclosures
             // 
-            dgvEnclosure.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvEnclosure.ColumnHeadersHeight = 29;
-            dgvEnclosure.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3 });
-            dgvEnclosure.Location = new Point(11, 59);
-            dgvEnclosure.Name = "dgvEnclosure";
-            dgvEnclosure.RowHeadersWidth = 51;
-            dgvEnclosure.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvEnclosure.Size = new Size(539, 264);
-            dgvEnclosure.TabIndex = 0;
+            dgvEnclosures.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEnclosures.Location = new Point(30, 100);
+            dgvEnclosures.Name = "dgvEnclosures";
+            dgvEnclosures.ReadOnly = true;
+            dgvEnclosures.RowHeadersWidth = 51;
+            dgvEnclosures.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEnclosures.Size = new Size(833, 277);
+            dgvEnclosures.TabIndex = 3;
+            dgvEnclosures.CellClick += dgvEnclosures_CellClick;
             // 
-            // dataGridViewTextBoxColumn1
+            // dgvAnimals
             // 
-            dataGridViewTextBoxColumn1.HeaderText = "Enclosure ID";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 125;
+            dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAnimals.Location = new Point(30, 446);
+            dgvAnimals.Name = "dgvAnimals";
+            dgvAnimals.ReadOnly = true;
+            dgvAnimals.RowHeadersWidth = 51;
+            dgvAnimals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAnimals.Size = new Size(833, 272);
+            dgvAnimals.TabIndex = 6;
+            dgvAnimals.CellClick += dgvAnimals_CellClick;
             // 
-            // dataGridViewTextBoxColumn2
+            // dgvFeeding
             // 
-            dataGridViewTextBoxColumn2.HeaderText = "Name";
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 125;
+            dgvFeeding.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvFeeding.Location = new Point(901, 100);
+            dgvFeeding.Name = "dgvFeeding";
+            dgvFeeding.ReadOnly = true;
+            dgvFeeding.RowHeadersWidth = 51;
+            dgvFeeding.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvFeeding.Size = new Size(400, 618);
+            dgvFeeding.TabIndex = 7;
+            dgvFeeding.CellClick += dgvFeeding_CellClick;
             // 
-            // dataGridViewTextBoxColumn3
+            // txtSearch
             // 
-            dataGridViewTextBoxColumn3.HeaderText = "Location";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 125;
+            txtSearch.Location = new Point(638, 25);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(329, 27);
+            txtSearch.TabIndex = 4;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(1000, 21);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(105, 35);
+            btnSearch.TabIndex = 5;
+            btnSearch.Text = "ตกลง";
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(11, 12);
+            btnAdd.Location = new Point(30, 21);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 23);
-            btnAdd.TabIndex = 1;
+            btnAdd.Size = new Size(90, 35);
+            btnAdd.TabIndex = 8;
             btnAdd.Text = "เพิ่ม";
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(111, 12);
+            btnEdit.Location = new Point(130, 21);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(75, 23);
-            btnEdit.TabIndex = 2;
+            btnEdit.Size = new Size(90, 35);
+            btnEdit.TabIndex = 9;
             btnEdit.Text = "แก้ไข";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(211, 12);
+            btnDelete.Location = new Point(230, 21);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
-            btnDelete.TabIndex = 3;
+            btnDelete.Size = new Size(90, 35);
+            btnDelete.TabIndex = 10;
             btnDelete.Text = "ลบ";
             btnDelete.Click += btnDelete_Click;
             // 
+            // lblEnclosures
+            // 
+            lblEnclosures.AutoSize = true;
+            lblEnclosures.Location = new Point(30, 77);
+            lblEnclosures.Name = "lblEnclosures";
+            lblEnclosures.Size = new Size(74, 20);
+            lblEnclosures.TabIndex = 0;
+            lblEnclosures.Text = "1. เลือกกรง";
+            // 
+            // lblAnimals
+            // 
+            lblAnimals.AutoSize = true;
+            lblAnimals.Location = new Point(30, 412);
+            lblAnimals.Name = "lblAnimals";
+            lblAnimals.Size = new Size(81, 20);
+            lblAnimals.TabIndex = 1;
+            lblAnimals.Text = "2. เลือกสัตว์ ";
+            // 
+            // lblFeeding
+            // 
+            lblFeeding.AutoSize = true;
+            lblFeeding.Location = new Point(901, 77);
+            lblFeeding.Name = "lblFeeding";
+            lblFeeding.Size = new Size(109, 20);
+            lblFeeding.TabIndex = 2;
+            lblFeeding.Text = "3. ตารางให้อาหาร";
+            // 
+            // lblAll
+            // 
+            lblAll.Location = new Point(326, 21);
+            lblAll.Name = "lblAll";
+            lblAll.Size = new Size(88, 35);
+            lblAll.TabIndex = 11;
+            lblAll.Text = "แสดงทั้งหมด";
+            lblAll.UseVisualStyleBackColor = true;
+            lblAll.Click += lblAll_Click;
+            // 
             // EnclosureForm
             // 
-            ClientSize = new Size(562, 335);
-            Controls.Add(dgvEnclosure);
+            ClientSize = new Size(1323, 762);
+            Controls.Add(lblAll);
+            Controls.Add(lblEnclosures);
+            Controls.Add(lblAnimals);
+            Controls.Add(lblFeeding);
+            Controls.Add(dgvEnclosures);
+            Controls.Add(txtSearch);
+            Controls.Add(btnSearch);
+            Controls.Add(dgvAnimals);
+            Controls.Add(dgvFeeding);
             Controls.Add(btnAdd);
             Controls.Add(btnEdit);
             Controls.Add(btnDelete);
             Name = "EnclosureForm";
-            Text = "Enclosure Management";
-            ((System.ComponentModel.ISupportInitialize)dgvEnclosure).EndInit();
+            Text = "จัดการข้อมูลกรงและตารางให้อาหาร";
+            Load += EnclosureForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvEnclosures).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvFeeding).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private Button lblAll;
     }
 }

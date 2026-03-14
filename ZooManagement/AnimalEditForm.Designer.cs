@@ -69,7 +69,7 @@
             // 
             // cbGender
             // 
-            cbGender.Items.AddRange(new object[] { "Male", "Female" });
+            cbGender.Items.AddRange(new object[] { "ผู้", "เมีย" });
             cbGender.Location = new Point(150, 70);
             cbGender.Name = "cbGender";
             cbGender.Size = new Size(121, 28);
