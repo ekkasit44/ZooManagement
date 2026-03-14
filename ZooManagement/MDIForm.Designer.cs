@@ -1,4 +1,4 @@
-﻿namespace ZooManagement
+namespace ZooManagement
 {
     partial class MDIForm
     {
@@ -39,34 +39,39 @@
             mnuNomalF = new ToolStripMenuItem();
             mnuCloseF = new ToolStripMenuItem();
             mnuCloseAllF = new ToolStripMenuItem();
-            mnuAnimalform = new ToolStripMenuItem();
-            mnuAnimal = new ToolStripMenuItem();
-            mnuFood = new ToolStripMenuItem();
-            mnuAnimalType = new ToolStripMenuItem();
-            mnuSpeciesInfo = new ToolStripMenuItem();
-            mnuEfrm = new ToolStripMenuItem();
-            nmuEnclosure = new ToolStripMenuItem();
-            nmuKeeper = new ToolStripMenuItem();
             mnuArrangeF = new ToolStripMenuItem();
             mnuVertical = new ToolStripMenuItem();
             mnuHorizontal = new ToolStripMenuItem();
+            toolStrip1 = new ToolStrip();
+            toolBtnAnimal = new ToolStripButton();
+            toolBtnAnimalType = new ToolStripButton();
+            toolBtnSpecies = new ToolStripButton();
+            toolBtnEnclosure = new ToolStripButton();
+            toolBtnKeeper = new ToolStripButton();
+            toolBtnFood = new ToolStripButton();
+            toolBtnFeeding = new ToolStripButton();
+            toolBtnRefresh = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            toolStripSearchText = new ToolStripTextBox();
+            toolStripSearchButton = new ToolStripButton();
             menuStrip1.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuF, mnuAnimalform, mnuEfrm, mnuArrangeF });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuF, mnuArrangeF });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(776, 28);
+            menuStrip1.Size = new Size(755, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // mnuF
             // 
-            mnuF.BackColor = Color.FromArgb(224, 224, 224);
+            mnuF.BackColor = SystemColors.Control;
             mnuF.DropDownItems.AddRange(new ToolStripItem[] { mnuMax, toolStripMenuItem1, mnuMin, toolStripMenuItem2, mnuExit, toolStripMenuItem3, mnuNomalF, mnuCloseF, mnuCloseAllF });
             mnuF.Name = "mnuF";
             mnuF.Size = new Size(55, 24);
@@ -129,69 +134,9 @@
             mnuCloseAllF.Text = "ปิดฟอร์มทั้งหมด";
             mnuCloseAllF.Click += mnuCloseAllF_Click;
             // 
-            // mnuAnimalform
-            // 
-            mnuAnimalform.BackColor = Color.FromArgb(224, 224, 224);
-            mnuAnimalform.DropDownItems.AddRange(new ToolStripItem[] { mnuAnimal, mnuFood, mnuAnimalType, mnuSpeciesInfo });
-            mnuAnimalform.Name = "mnuAnimalform";
-            mnuAnimalform.Size = new Size(119, 24);
-            mnuAnimalform.Text = "จัดการข้อมูลสัตว์";
-            mnuAnimalform.Click += mnuAnimalform_Click;
-            // 
-            // mnuAnimal
-            // 
-            mnuAnimal.Name = "mnuAnimal";
-            mnuAnimal.Size = new Size(224, 26);
-            mnuAnimal.Text = "ข้อมูลสัตว์";
-            mnuAnimal.Click += mnuAnimal_Click;
-            // 
-            // mnuFood
-            // 
-            mnuFood.Name = "mnuFood";
-            mnuFood.Size = new Size(224, 26);
-            mnuFood.Text = "ข้อมูลอาหาร";
-            mnuFood.Click += mnuFood_Click;
-            // 
-            // mnuAnimalType
-            // 
-            mnuAnimalType.Name = "mnuAnimalType";
-            mnuAnimalType.Size = new Size(224, 26);
-            mnuAnimalType.Text = "ข้อมูลประเภทของสัตว์";
-            mnuAnimalType.Click += mnuAnimalType_Click;
-            // 
-            // mnuSpeciesInfo
-            // 
-            mnuSpeciesInfo.Name = "mnuSpeciesInfo";
-            mnuSpeciesInfo.Size = new Size(224, 26);
-            mnuSpeciesInfo.Text = "ข้อมูลชนิดพันธุ์";
-            mnuSpeciesInfo.Click += mnuSpeciesInfo_Click;
-            // 
-            // mnuEfrm
-            // 
-            mnuEfrm.BackColor = Color.FromArgb(224, 224, 224);
-            mnuEfrm.DropDownItems.AddRange(new ToolStripItem[] { nmuEnclosure, nmuKeeper });
-            mnuEfrm.Name = "mnuEfrm";
-            mnuEfrm.Size = new Size(140, 24);
-            mnuEfrm.Text = "จัดการข้อมูลกรงสัตว์";
-            mnuEfrm.Click += mnuEfrm_Click;
-            // 
-            // nmuEnclosure
-            // 
-            nmuEnclosure.Name = "nmuEnclosure";
-            nmuEnclosure.Size = new Size(224, 26);
-            nmuEnclosure.Text = "ข้อมูลกรงสัตว์";
-            nmuEnclosure.Click += mnuEnclosure_Click;
-            // 
-            // nmuKeeper
-            // 
-            nmuKeeper.Name = "nmuKeeper";
-            nmuKeeper.Size = new Size(224, 26);
-            nmuKeeper.Text = "ข้อมูลผู้ดูแลกรงสัตว์";
-            nmuKeeper.Click += mnuKeeper_Click;
-            // 
             // mnuArrangeF
             // 
-            mnuArrangeF.BackColor = Color.FromArgb(224, 224, 224);
+            mnuArrangeF.BackColor = SystemColors.ButtonFace;
             mnuArrangeF.DropDownItems.AddRange(new ToolStripItem[] { mnuVertical, mnuHorizontal });
             mnuArrangeF.Name = "mnuArrangeF";
             mnuArrangeF.Size = new Size(96, 24);
@@ -211,19 +156,118 @@
             mnuHorizontal.Text = "แนวนอน";
             mnuHorizontal.Click += mnuHorizontal_Click;
             // 
+            // toolStrip1
+            // 
+            toolStrip1.BackColor = Color.FromArgb(240, 240, 255);
+            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolBtnAnimal, toolBtnAnimalType, toolBtnSpecies, toolBtnEnclosure, toolBtnKeeper, toolBtnFood, toolBtnFeeding, toolBtnRefresh, toolStripSeparator1, toolStripSearchText, toolStripSearchButton });
+            toolStrip1.Location = new Point(0, 28);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(755, 29);
+            toolStrip1.TabIndex = 2;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // toolBtnAnimal
+            // 
+            toolBtnAnimal.Name = "toolBtnAnimal";
+            toolBtnAnimal.Size = new Size(37, 26);
+            toolBtnAnimal.Text = "สัตว์";
+            toolBtnAnimal.ToolTipText = "เปิดหน้าข้อมูลสัตว์";
+            toolBtnAnimal.Click += toolBtnAnimal_Click;
+            // 
+            // toolBtnAnimalType
+            // 
+            toolBtnAnimalType.Name = "toolBtnAnimalType";
+            toolBtnAnimalType.Size = new Size(55, 26);
+            toolBtnAnimalType.Text = "ประเภท";
+            toolBtnAnimalType.ToolTipText = "เปิดหน้าประเภทสัตว์";
+            toolBtnAnimalType.Click += toolBtnAnimalType_Click;
+            // 
+            // toolBtnSpecies
+            // 
+            toolBtnSpecies.Name = "toolBtnSpecies";
+            toolBtnSpecies.Size = new Size(67, 26);
+            toolBtnSpecies.Text = "ชนิดพันธุ์";
+            toolBtnSpecies.ToolTipText = "เปิดหน้าชนิดพันธุ์";
+            toolBtnSpecies.Click += toolBtnSpecies_Click;
+            // 
+            // toolBtnEnclosure
+            // 
+            toolBtnEnclosure.Name = "toolBtnEnclosure";
+            toolBtnEnclosure.Size = new Size(34, 26);
+            toolBtnEnclosure.Text = "กรง";
+            toolBtnEnclosure.ToolTipText = "เปิดหน้ากรงสัตว์";
+            toolBtnEnclosure.Click += toolBtnEnclosure_Click;
+            // 
+            // toolBtnKeeper
+            // 
+            toolBtnKeeper.Name = "toolBtnKeeper";
+            toolBtnKeeper.Size = new Size(46, 26);
+            toolBtnKeeper.Text = "ผู้ดูแล";
+            toolBtnKeeper.ToolTipText = "เปิดหน้าผู้ดูแล";
+            toolBtnKeeper.Click += toolBtnKeeper_Click;
+            // 
+            // toolBtnFood
+            // 
+            toolBtnFood.Name = "toolBtnFood";
+            toolBtnFood.Size = new Size(50, 26);
+            toolBtnFood.Text = "อาหาร";
+            toolBtnFood.ToolTipText = "เปิดหน้าข้อมูลอาหาร";
+            toolBtnFood.Click += toolBtnFood_Click;
+            // 
+            // toolBtnFeeding
+            // 
+            toolBtnFeeding.Name = "toolBtnFeeding";
+            toolBtnFeeding.Size = new Size(91, 26);
+            toolBtnFeeding.Text = "เวลาให้อาหาร";
+            toolBtnFeeding.ToolTipText = "เปิดหน้าตารางเวลาให้อาหาร";
+            toolBtnFeeding.Click += toolBtnFeeding_Click;
+            // 
+            // toolBtnRefresh
+            // 
+            toolBtnRefresh.Name = "toolBtnRefresh";
+            toolBtnRefresh.Size = new Size(48, 26);
+            toolBtnRefresh.Text = "รีเฟรช";
+            toolBtnRefresh.ToolTipText = "รีเฟรชข้อมูลของฟอร์มที่เปิดอยู่";
+            toolBtnRefresh.Click += toolBtnRefresh_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 29);
+            // 
+            // toolStripSearchText
+            // 
+            toolStripSearchText.Name = "toolStripSearchText";
+            toolStripSearchText.Size = new Size(300, 27);
+            toolStripSearchText.ToolTipText = "ค้นหา (ค้นหาคำในแถวเดียวกัน)";
+            toolStripSearchText.KeyDown += ToolStripSearchText_KeyDown;
+            // 
+            // toolStripSearchButton
+            // 
+            toolStripSearchButton.Name = "toolStripSearchButton";
+            toolStripSearchButton.Size = new Size(47, 24);
+            toolStripSearchButton.Text = "ค้นหา";
+            toolStripSearchButton.Click += ToolStripSearchButton_Click;
+            // 
             // MDIForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(776, 617);
+            ClientSize = new Size(755, 493);
+            Controls.Add(toolStrip1);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "MDIForm";
-            Text = "ZooManagement";
+            Text = "ระบบจัดการสวนสัตว์";
             Load += MDIForm_Load;
+            Resize += MDIForm_Resize;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -231,6 +275,18 @@
         #endregion
 
         private MenuStrip menuStrip1;
+        private ToolStrip toolStrip1;
+        private ToolStripTextBox toolStripSearchText;
+        private ToolStripButton toolStripSearchButton;
+        private ToolStripButton toolBtnAnimal;
+        private ToolStripButton toolBtnAnimalType;
+        private ToolStripButton toolBtnSpecies;
+        private ToolStripButton toolBtnEnclosure;
+        private ToolStripButton toolBtnKeeper;
+        private ToolStripButton toolBtnFood;
+        private ToolStripButton toolBtnFeeding;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton toolBtnRefresh;
         private ToolStripMenuItem mnuF;
         private ToolStripMenuItem mnuMax;
         private ToolStripMenuItem mnuMin;
@@ -244,13 +300,5 @@
         private ToolStripMenuItem mnuNomalF;
         private ToolStripMenuItem mnuCloseF;
         private ToolStripMenuItem mnuCloseAllF;
-        private ToolStripMenuItem mnuAnimalform;
-        private ToolStripMenuItem mnuAnimal;
-        private ToolStripMenuItem mnuAnimalType;
-        private ToolStripMenuItem mnuSpeciesInfo;
-        private ToolStripMenuItem mnuEfrm;
-        private ToolStripMenuItem nmuEnclosure;
-        private ToolStripMenuItem nmuKeeper;
-        private ToolStripMenuItem mnuFood;
     }
 }
