@@ -4,117 +4,138 @@
     {
         private System.ComponentModel.IContainer components = null;
 
-        private System.Windows.Forms.DataGridView dgvSchedule;
+        private System.Windows.Forms.DataGridView dgvFeeding;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
 
         private void InitializeComponent()
         {
-            dgvSchedule = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dgvFeeding = new DataGridView();
             btnAdd = new Button();
             btnEdit = new Button();
             btnDelete = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvSchedule).BeginInit();
+            dgvAnimal = new DataGridView();
+            dgvFood = new DataGridView();
+            txtSearch = new TextBox();
+            btnSearch = new Button();
+            lblS = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvFeeding).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimal).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvFood).BeginInit();
             SuspendLayout();
             // 
-            // dgvSchedule
+            // dgvFeeding
             // 
-            dgvSchedule.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvSchedule.ColumnHeadersHeight = 29;
-            dgvSchedule.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5 });
-            dgvSchedule.Location = new Point(10, 41);
-            dgvSchedule.Name = "dgvSchedule";
-            dgvSchedule.RowHeadersWidth = 51;
-            dgvSchedule.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSchedule.Size = new Size(680, 297);
-            dgvSchedule.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.HeaderText = "Schedule ID";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.HeaderText = "Animal ID";
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "Food ID";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.HeaderText = "Feeding Time";
-            dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.HeaderText = "Quantity";
-            dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.Width = 125;
+            dgvFeeding.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvFeeding.ColumnHeadersHeight = 29;
+            dgvFeeding.Location = new Point(48, 80);
+            dgvFeeding.Name = "dgvFeeding";
+            dgvFeeding.RowHeadersWidth = 51;
+            dgvFeeding.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvFeeding.Size = new Size(1271, 319);
+            dgvFeeding.TabIndex = 0;
             // 
             // btnAdd
             // 
             btnAdd.Location = new Point(10, 12);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 23);
+            btnAdd.Size = new Size(115, 36);
             btnAdd.TabIndex = 1;
             btnAdd.Text = "เพิ่ม";
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(110, 12);
+            btnEdit.Location = new Point(131, 12);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(75, 23);
+            btnEdit.Size = new Size(115, 36);
             btnEdit.TabIndex = 2;
             btnEdit.Text = "แก้ไข";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(210, 12);
+            btnDelete.Location = new Point(247, 12);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
+            btnDelete.Size = new Size(115, 36);
             btnDelete.TabIndex = 3;
             btnDelete.Text = "ลบ";
             btnDelete.Click += btnDelete_Click;
             // 
+            // dgvAnimal
+            // 
+            dgvAnimal.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvAnimal.ColumnHeadersHeight = 29;
+            dgvAnimal.Location = new Point(149, 432);
+            dgvAnimal.Name = "dgvAnimal";
+            dgvAnimal.RowHeadersWidth = 51;
+            dgvAnimal.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAnimal.Size = new Size(438, 319);
+            dgvAnimal.TabIndex = 4;
+            // 
+            // dgvFood
+            // 
+            dgvFood.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvFood.ColumnHeadersHeight = 29;
+            dgvFood.Location = new Point(747, 432);
+            dgvFood.Name = "dgvFood";
+            dgvFood.RowHeadersWidth = 51;
+            dgvFood.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvFood.Size = new Size(436, 319);
+            dgvFood.TabIndex = 5;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(511, 21);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(305, 27);
+            txtSearch.TabIndex = 6;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(864, 21);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(94, 29);
+            btnSearch.TabIndex = 7;
+            btnSearch.Text = "ตกลง";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // lblS
+            // 
+            lblS.AutoSize = true;
+            lblS.Location = new Point(455, 24);
+            lblS.Name = "lblS";
+            lblS.Size = new Size(43, 20);
+            lblS.TabIndex = 8;
+            lblS.Text = "ค้นหา";
+            // 
             // FeedingScheduleForm
             // 
-            ClientSize = new Size(702, 350);
-            Controls.Add(dgvSchedule);
+            ClientSize = new Size(1361, 817);
+            Controls.Add(lblS);
+            Controls.Add(btnSearch);
+            Controls.Add(txtSearch);
+            Controls.Add(dgvFood);
+            Controls.Add(dgvAnimal);
+            Controls.Add(dgvFeeding);
             Controls.Add(btnAdd);
             Controls.Add(btnEdit);
             Controls.Add(btnDelete);
             Name = "FeedingScheduleForm";
             Text = "Feeding Schedule Management";
             Load += FeedingScheduleForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvSchedule).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvFeeding).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimal).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvFood).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
-
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridView dgvAnimal;
+        private DataGridView dgvFood;
+        private TextBox txtSearch;
+        private Button btnSearch;
+        private Label lblS;
     }
 }

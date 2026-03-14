@@ -103,7 +103,8 @@ namespace ZooManagement
             int id = Convert.ToInt32(
                 dgvAnimal.CurrentRow.Cells["รหัสสัตว์"].Value);
 
-            AnimalEditForm f = new AnimalEditForm(id);
+            AnimalEditForm f = new AnimalEditForm();
+            f.LoadFor(id);
             f.ShowDialog();
 
             LoadAnimal();

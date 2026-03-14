@@ -13,6 +13,8 @@
         private TextBox txtFoodID;
         private TextBox txtFeedingTime;
         private TextBox txtQuantity;
+        private Label lblKeeper;
+        private ComboBox cmbKeeper;
 
         private Button btnSave;
         private Button btnCancel;
@@ -27,6 +29,8 @@
             txtFoodID = new TextBox();
             txtFeedingTime = new TextBox();
             txtQuantity = new TextBox();
+            lblKeeper = new Label();
+            cmbKeeper = new ComboBox();
             btnSave = new Button();
             btnCancel = new Button();
             SuspendLayout();
@@ -91,27 +95,43 @@
             txtQuantity.Size = new Size(200, 27);
             txtQuantity.TabIndex = 7;
             // 
+            // lblKeeper
+            // 
+            lblKeeper.Location = new Point(30, 190);
+            lblKeeper.Name = "lblKeeper";
+            lblKeeper.Size = new Size(100, 23);
+            lblKeeper.TabIndex = 10;
+            lblKeeper.Text = "ผู้ดูแล";
+            // 
+            // cmbKeeper
+            // 
+            cmbKeeper.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbKeeper.Location = new Point(150, 190);
+            cmbKeeper.Name = "cmbKeeper";
+            cmbKeeper.Size = new Size(200, 28);
+            cmbKeeper.TabIndex = 11;
+            // 
             // btnSave
             // 
-            btnSave.Location = new Point(80, 200);
+            btnSave.Location = new Point(111, 262);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 23);
+            btnSave.Size = new Size(91, 37);
             btnSave.TabIndex = 8;
             btnSave.Text = "บันทึก";
             btnSave.Click += btnSave_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(200, 200);
+            btnCancel.Location = new Point(229, 262);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(75, 23);
+            btnCancel.Size = new Size(92, 37);
             btnCancel.TabIndex = 9;
             btnCancel.Text = "ยกเลิก";
             btnCancel.Click += btnCancel_Click;
             // 
             // FeedingScheduleEditForm
             // 
-            ClientSize = new Size(402, 253);
+            ClientSize = new Size(445, 318);
             Controls.Add(lblAnimal);
             Controls.Add(txtAnimalID);
             Controls.Add(lblFood);
@@ -120,6 +140,8 @@
             Controls.Add(txtFeedingTime);
             Controls.Add(lblQty);
             Controls.Add(txtQuantity);
+            Controls.Add(lblKeeper);
+            Controls.Add(cmbKeeper);
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
             Name = "FeedingScheduleEditForm";

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
+using System.Data;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
 
 namespace ZooManagement
 {
@@ -11,42 +12,80 @@ namespace ZooManagement
             InitializeComponent();
             this.Load += FeedingScheduleForm_Load;
         }
+        DataTable dtFeeding = new DataTable();
 
         private void FeedingScheduleForm_Load(object sender, EventArgs e)
         {
-            LoadSchedule();
+            LoadFeeding();
+            LoadAnimal();
+            LoadFood();
         }
 
-        private void LoadSchedule()
+        private void LoadFeeding()
         {
-            dgvSchedule.Rows.Clear();
-
             using (SqlConnection conn = connectDB.ConnectZooDB())
             {
-                string sql = @"SELECT feeding_id,
-                              animal_id,
-                              food_id,
-                              amount,
-                              feeding_date,
-                              feeding_time,
-                              keeper_id
-                       FROM FeedingSchedule";
+                string sql = @"SELECT
+        fs.feeding_id AS รหัสการให้อาหาร,
+        a.name AS ชื่อสัตว์,
+        f.name AS อาหาร,
+        fs.feeding_time AS เวลาให้อาหาร,
+        fs.amount AS ปริมาณ,
+        k.name AS ผู้ให้อาหาร
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
+        FROM FeedingSchedule fs
 
-                while (reader.Read())
-                {
-                    dgvSchedule.Rows.Add(
-                        reader["feeding_id"].ToString(),
-                        reader["animal_id"].ToString(),
-                        reader["food_id"].ToString(),
-                        reader["amount"].ToString(),
-                        reader["feeding_date"].ToString(),
-                        reader["feeding_time"].ToString(),
-                        reader["keeper_id"].ToString()
-                    );
-                }
+        JOIN Animal a
+        ON fs.animal_id = a.animal_id
+
+        JOIN Food f
+        ON fs.food_id = f.food_id
+
+        LEFT JOIN keeper k
+        ON fs.keeper_id = k.keeper_id";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+
+                dtFeeding.Clear();
+                da.Fill(dtFeeding);
+
+                dgvFeeding.DataSource = dtFeeding;
+            }
+        }
+
+        private void LoadAnimal()
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string sql = @"SELECT
+        animal_id AS รหัสสัตว์,
+        name AS ชื่อสัตว์
+        FROM Animal";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvAnimal.DataSource = dt;
+            }
+        }
+
+        private void LoadFood()
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string sql = @"SELECT
+        food_id AS รหัสอาหาร,
+        name AS อาหาร
+        FROM Food";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvFood.DataSource = dt;
             }
         }
 
@@ -54,45 +93,65 @@ namespace ZooManagement
         {
             FeedingScheduleEditForm frm = new FeedingScheduleEditForm();
             frm.ShowDialog();
-            LoadSchedule();
+            LoadFeeding();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvSchedule.SelectedRows.Count == 0)
+            if (dgvFeeding.CurrentRow == null)
             {
-                MessageBox.Show("Please select row");
+                MessageBox.Show("กรุณาเลือกข้อมูล");
                 return;
             }
 
+            int id = Convert.ToInt32(
+                dgvFeeding.CurrentRow.Cells["รหัสการให้อาหาร"].Value
+            );
+
             FeedingScheduleEditForm frm = new FeedingScheduleEditForm();
+            frm.FeedingID = id;
 
-            frm.ScheduleID = dgvSchedule.SelectedRows[0].Cells[0].Value.ToString();
-            frm.AnimalID = dgvSchedule.SelectedRows[0].Cells[1].Value.ToString();
-            frm.FoodID = dgvSchedule.SelectedRows[0].Cells[2].Value.ToString();
-            frm.FeedingTime = dgvSchedule.SelectedRows[0].Cells[3].Value.ToString();
-            frm.Quantity = dgvSchedule.SelectedRows[0].Cells[4].Value.ToString();
-
-            frm.ShowDialog();
-            LoadSchedule();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LoadFeeding();   // รีโหลดตาราง
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvSchedule.SelectedRows.Count == 0)
+            if (dgvFeeding.SelectedRows.Count == 0)
                 return;
 
-            string id = dgvSchedule.SelectedRows[0].Cells[0].Value.ToString();
+            string id = dgvFeeding.SelectedRows[0].Cells[0].Value.ToString();
 
             using (SqlConnection conn = connectDB.ConnectZooDB())
             {
-                string sql = "DELETE FROM FeedingSchedule WHERE schedule_id=@id";
+                string sql = "DELETE FROM FeedingSchedule WHERE feeding_id=@id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.ExecuteNonQuery();
             }
 
-            LoadSchedule();
+            LoadFeeding();
+        }
+
+        private void SearchFeeding()
+        {
+            string keyword = txtSearch.Text.Trim();
+
+            DataView dv = new DataView(dtFeeding);
+
+            dv.RowFilter =
+            $"CONVERT([รหัสการให้อาหาร],'System.String') LIKE '%{keyword}%' OR " +
+            $"[ชื่อสัตว์] LIKE '%{keyword}%' OR " +
+            $"[อาหาร] LIKE '%{keyword}%'";
+
+            dgvFeeding.DataSource = dv;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchFeeding();
         }
     }
 }

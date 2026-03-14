@@ -11,6 +11,14 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ComboBox cbGender;
         private System.Windows.Forms.DateTimePicker dtBirth;
+        private System.Windows.Forms.Label lblEnclosure;
+        private System.Windows.Forms.ComboBox cmbEnclosure;
+        private System.Windows.Forms.Label lblKeeper;
+        private System.Windows.Forms.ComboBox cmbKeeper;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.Label lblSpecies;
+        private System.Windows.Forms.ComboBox cmbSpecies;
 
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
@@ -32,6 +40,14 @@
             txtName = new TextBox();
             cbGender = new ComboBox();
             dtBirth = new DateTimePicker();
+            lblEnclosure = new Label();
+            cmbEnclosure = new ComboBox();
+            lblKeeper = new Label();
+            cmbKeeper = new ComboBox();
+            lblType = new Label();
+            cmbType = new ComboBox();
+            lblSpecies = new Label();
+            cmbSpecies = new ComboBox();
             btnSave = new Button();
             btnCancel = new Button();
             SuspendLayout();
@@ -82,9 +98,71 @@
             dtBirth.Size = new Size(200, 27);
             dtBirth.TabIndex = 5;
             // 
+            // lblEnclosure
+            // 
+            lblEnclosure.Location = new Point(30, 150);
+            lblEnclosure.Name = "lblEnclosure";
+            lblEnclosure.Size = new Size(100, 23);
+            lblEnclosure.TabIndex = 8;
+            lblEnclosure.Text = "กรง";
+            // 
+            // cmbEnclosure
+            // 
+            cmbEnclosure.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEnclosure.Location = new Point(150, 150);
+            cmbEnclosure.Name = "cmbEnclosure";
+            cmbEnclosure.Size = new Size(223, 28);
+            cmbEnclosure.TabIndex = 9;
+            cmbEnclosure.SelectedIndexChanged += cmbEnclosure_SelectedIndexChanged;
+            // 
+            // lblKeeper
+            // 
+            lblKeeper.Location = new Point(30, 190);
+            lblKeeper.Name = "lblKeeper";
+            lblKeeper.Size = new Size(100, 23);
+            lblKeeper.TabIndex = 10;
+            lblKeeper.Text = "ผู้ดูแล";
+            // 
+            // cmbKeeper
+            // 
+            cmbKeeper.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbKeeper.Location = new Point(150, 190);
+            cmbKeeper.Name = "cmbKeeper";
+            cmbKeeper.Size = new Size(223, 28);
+            cmbKeeper.TabIndex = 11;
+            // 
+            // lblType
+            // 
+            lblType.Location = new Point(30, 241);
+            lblType.Name = "lblType";
+            lblType.Size = new Size(55, 23);
+            lblType.TabIndex = 12;
+            lblType.Text = "ชนิด";
+            // 
+            // cmbType
+            // 
+            cmbType.Location = new Point(150, 236);
+            cmbType.Name = "cmbType";
+            cmbType.Size = new Size(121, 28);
+            cmbType.TabIndex = 13;
+            // 
+            // lblSpecies
+            // 
+            lblSpecies.Location = new Point(12, 319);
+            lblSpecies.Name = "lblSpecies";
+            lblSpecies.Size = new Size(100, 23);
+            lblSpecies.TabIndex = 14;
+            // 
+            // cmbSpecies
+            // 
+            cmbSpecies.Location = new Point(150, 291);
+            cmbSpecies.Name = "cmbSpecies";
+            cmbSpecies.Size = new Size(121, 28);
+            cmbSpecies.TabIndex = 15;
+            // 
             // btnSave
             // 
-            btnSave.Location = new Point(150, 160);
+            btnSave.Location = new Point(150, 471);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(85, 40);
             btnSave.TabIndex = 6;
@@ -93,7 +171,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(250, 160);
+            btnCancel.Location = new Point(250, 471);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(100, 40);
             btnCancel.TabIndex = 7;
@@ -102,13 +180,21 @@
             // 
             // AnimalEditForm
             // 
-            ClientSize = new Size(400, 230);
+            ClientSize = new Size(590, 554);
             Controls.Add(label1);
             Controls.Add(txtName);
             Controls.Add(label2);
             Controls.Add(cbGender);
             Controls.Add(label3);
             Controls.Add(dtBirth);
+            Controls.Add(lblEnclosure);
+            Controls.Add(cmbEnclosure);
+            Controls.Add(lblKeeper);
+            Controls.Add(cmbKeeper);
+            Controls.Add(lblType);
+            Controls.Add(cmbType);
+            Controls.Add(lblSpecies);
+            Controls.Add(cmbSpecies);
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
             Name = "AnimalEditForm";
