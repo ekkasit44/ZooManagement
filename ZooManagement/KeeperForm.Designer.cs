@@ -29,60 +29,67 @@ namespace ZooManagement
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            btnAdd = new Button();
-            btnEdit = new Button();
-            btnDelete = new Button();
+            comboKeeper = new ComboBox();
+            comboEnclosure = new ComboBox();
+            btnApply = new Button();
+            btnClear = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(29, 97);
+            dataGridView1.Location = new Point(175, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1202, 536);
+            dataGridView1.Size = new Size(1029, 417);
             dataGridView1.TabIndex = 0;
             // 
-            // btnAdd
+            // comboKeeper
             // 
-            btnAdd.Location = new Point(29, 22);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(94, 29);
-            btnAdd.TabIndex = 1;
-            btnAdd.Text = "เพิ่ม";
-            btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
+            comboKeeper.FormattingEnabled = true;
+            comboKeeper.Location = new Point(48, 494);
+            comboKeeper.Name = "comboKeeper";
+            comboKeeper.Size = new Size(270, 28);
+            comboKeeper.TabIndex = 1;
             // 
-            // btnEdit
+            // comboEnclosure
             // 
-            btnEdit.Location = new Point(235, 22);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(94, 29);
-            btnEdit.TabIndex = 2;
-            btnEdit.Text = "เเก้ไข";
-            btnEdit.UseVisualStyleBackColor = true;
-            btnEdit.Click += btnEdit_Click;
+            comboEnclosure.FormattingEnabled = true;
+            comboEnclosure.Location = new Point(380, 494);
+            comboEnclosure.Name = "comboEnclosure";
+            comboEnclosure.Size = new Size(244, 28);
+            comboEnclosure.TabIndex = 2;
             // 
-            // btnDelete
+            // btnApply
             // 
-            btnDelete.Location = new Point(453, 22);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(94, 29);
-            btnDelete.TabIndex = 3;
-            btnDelete.Text = "ลบ";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
+            btnApply.Location = new Point(716, 494);
+            btnApply.Name = "btnApply";
+            btnApply.Size = new Size(94, 29);
+            btnApply.TabIndex = 3;
+            btnApply.Text = "ค้นหา";
+            btnApply.UseVisualStyleBackColor = true;
+            btnApply.Click += btnApply_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(873, 494);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(94, 29);
+            btnClear.TabIndex = 4;
+            btnClear.Text = "เคลียร์";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // KeeperForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1272, 675);
-            Controls.Add(btnDelete);
-            Controls.Add(btnEdit);
-            Controls.Add(btnAdd);
+            Controls.Add(btnClear);
+            Controls.Add(btnApply);
+            Controls.Add(comboEnclosure);
+            Controls.Add(comboKeeper);
             Controls.Add(dataGridView1);
             Name = "KeeperForm";
             Text = "KeeperForm";
@@ -94,8 +101,9 @@ namespace ZooManagement
         #endregion
 
         private DataGridView dataGridView1;
-        private Button btnAdd;
-        private Button btnEdit;
-        private Button btnDelete;
+        private ComboBox comboKeeper;
+        private ComboBox comboEnclosure;
+        private Button btnApply;
+        private Button btnClear;
     }
 }
