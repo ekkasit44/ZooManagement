@@ -130,6 +130,16 @@ namespace ZooManagement
         {
             LoadData();
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+			KeeperEditForm frm = new KeeperEditForm();
+
+			if (frm.ShowDialog() == DialogResult.OK)
+			{
+				LoadData();
+			}
+		}
     }
     ;
 }
