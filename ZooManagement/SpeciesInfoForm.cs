@@ -26,16 +26,16 @@ namespace ZooManagement
             LoadData();
             LoadCombo();
             LoadSpecies();
-			LoadType();
+            LoadType();
 
 
 
-		}
+        }
         void LoadData()
         {
-			conn = connectDB.ConnectZooDB();
+            conn = connectDB.ConnectZooDB();
 
-			string sql = @"SELECT 
+            string sql = @"SELECT 
                     species_info_id,
                     common_name,
                     scientific_name,
@@ -44,47 +44,47 @@ namespace ZooManagement
                     conservation_status
                    FROM SpeciesInfo";
 
-			SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
 
-			DataTable dt = new DataTable();
-			da.Fill(dt);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
 
-			dataGridView1.DataSource = dt;
+            dataGridView1.DataSource = dt;
 
-			dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-			dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dataGridView1.MultiSelect = false;
-			dataGridView1.AllowUserToAddRows = false;
-			dataGridView1.RowHeadersVisible = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.RowHeadersVisible = false;
 
-			dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-			dataGridView1.Dock = DockStyle.Fill;
-		}
+            dataGridView1.Dock = DockStyle.Fill;
+        }
         void LoadCombo()
         {
-			conn = connectDB.ConnectZooDB();
+            conn = connectDB.ConnectZooDB();
 
-			string sql = "SELECT species_info_id, common_name FROM SpeciesInfo";
+            string sql = "SELECT species_info_id, common_name FROM SpeciesInfo";
 
-			SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
 
-			DataTable dt = new DataTable();
-			da.Fill(dt);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
 
-			comboSpecies.DataSource = dt;
-			comboSpecies.DisplayMember = "common_name";
-			comboSpecies.ValueMember = "species_info_id";
-		}
+            comboSpecies.DataSource = dt;
+            comboSpecies.DisplayMember = "common_name";
+            comboSpecies.ValueMember = "species_info_id";
+        }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-			conn = connectDB.ConnectZooDB();
+            conn = connectDB.ConnectZooDB();
 
-			string sql = @"SELECT 
+            string sql = @"SELECT 
                     species_info_id,
                     common_name,
                     scientific_name,
@@ -94,49 +94,55 @@ namespace ZooManagement
                    FROM SpeciesInfo
                    WHERE species_info_id = @id";
 
-			SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlCommand cmd = new SqlCommand(sql, conn);
 
-			cmd.Parameters.AddWithValue("@id", comboSpecies.SelectedValue);
+            cmd.Parameters.AddWithValue("@id", comboSpecies.SelectedValue);
 
-			SqlDataAdapter da = new SqlDataAdapter(cmd);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
 
-			DataTable dt = new DataTable();
-			da.Fill(dt);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
 
-			dataGridView1.DataSource = dt;
-		}
+            dataGridView1.DataSource = dt;
+        }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-			LoadData();
+            LoadData();
+        }
+        void LoadSpecies()
+        {
+            conn = connectDB.ConnectZooDB();
+
+            string sql = "SELECT species_info_id, common_name FROM SpeciesInfo";
+
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            comboSpecies.DataSource = dt;
+            comboSpecies.DisplayMember = "common_name";
+            comboSpecies.ValueMember = "species_info_id";
+        }
+        void LoadType()
+        {
+            conn = connectDB.ConnectZooDB();
+
+            string sql = "SELECT animal_type_id, type_name FROM AnimalType";
+
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            comboType.DataSource = dt;
+            comboType.DisplayMember = "type_name";
+            comboType.ValueMember = "animal_type_id";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SpeciesInfoEditForm form = new SpeciesInfoEditForm();
+			 form.ShowDialog();
 		}
-		void LoadSpecies()
-		{
-			conn = connectDB.ConnectZooDB();
-
-			string sql = "SELECT species_info_id, common_name FROM SpeciesInfo";
-
-			SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-			DataTable dt = new DataTable();
-			da.Fill(dt);
-
-			comboSpecies.DataSource = dt;
-			comboSpecies.DisplayMember = "common_name";
-			comboSpecies.ValueMember = "species_info_id";
-		}
-		void LoadType()
-		{
-			conn = connectDB.ConnectZooDB();
-
-			string sql = "SELECT animal_type_id, type_name FROM AnimalType";
-
-			SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-			DataTable dt = new DataTable();
-			da.Fill(dt);
-
-			comboType.DataSource = dt;
-			comboType.DisplayMember = "type_name";
-			comboType.ValueMember = "animal_type_id";
-		}
-	}
+    }
 }
