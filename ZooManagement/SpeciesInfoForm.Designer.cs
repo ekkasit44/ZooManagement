@@ -33,6 +33,7 @@ namespace ZooManagement
             comboType = new ComboBox();
             btnApply = new Button();
             btnClear = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -81,11 +82,22 @@ namespace ZooManagement
             btnClear.UseVisualStyleBackColor = true;
             btnClear.Click += btnClear_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(873, 535);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 5;
+            button1.Text = "เเก้ไข";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // SpeciesInfoForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1235, 684);
+            Controls.Add(button1);
             Controls.Add(btnClear);
             Controls.Add(btnApply);
             Controls.Add(comboType);
@@ -105,5 +117,6 @@ namespace ZooManagement
         private ComboBox comboType;
         private Button btnApply;
         private Button btnClear;
+        private Button button1;
     }
 }
