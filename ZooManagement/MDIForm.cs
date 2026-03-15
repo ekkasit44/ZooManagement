@@ -211,7 +211,7 @@ namespace ZooManagement
 
 
 
-       
+
 
 
         private void mnuFood_Click(object sender, EventArgs e)
@@ -226,7 +226,7 @@ namespace ZooManagement
         {
 
             mnuF.Enabled = true;
-           
+
             mnuArrangeF.Enabled = true;
         }
 
@@ -246,7 +246,7 @@ namespace ZooManagement
             fP.MdiParent = this;
             fP.Show();
 
-            
+
         }
 
         private void mnuFD_Click(object sender, EventArgs e)
@@ -261,6 +261,13 @@ namespace ZooManagement
             FoodForm mnuFood = new FoodForm();
             mnuFood.MdiParent = this;
             mnuFood.Show();
+        }
+
+        private void รายงานToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportForm mnuReport = new ReportForm();
+            mnuReport.MdiParent = this;
+            mnuReport.Show();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace ZooManagement
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDIForm));
             menuStrip1 = new MenuStrip();
             mnuF = new ToolStripMenuItem();
             mnuMax = new ToolStripMenuItem();
@@ -54,6 +55,8 @@ namespace ZooManagement
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripSearchText = new ToolStripTextBox();
             toolStripSearchButton = new ToolStripButton();
+            toolStripButton1 = new ToolStripButton();
+            รายงานToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -61,7 +64,7 @@ namespace ZooManagement
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuF, mnuArrangeF });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuF, mnuArrangeF, รายงานToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(755, 28);
@@ -80,57 +83,57 @@ namespace ZooManagement
             // mnuMax
             // 
             mnuMax.Name = "mnuMax";
-            mnuMax.Size = new Size(224, 26);
+            mnuMax.Size = new Size(183, 26);
             mnuMax.Text = "ขยาย ";
             mnuMax.Click += mnuMax_Click;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(221, 6);
+            toolStripMenuItem1.Size = new Size(180, 6);
             // 
             // mnuMin
             // 
             mnuMin.Name = "mnuMin";
-            mnuMin.Size = new Size(224, 26);
+            mnuMin.Size = new Size(183, 26);
             mnuMin.Text = "ย่อ  ";
             mnuMin.Click += mnuMin_Click;
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(221, 6);
+            toolStripMenuItem2.Size = new Size(180, 6);
             // 
             // mnuExit
             // 
             mnuExit.Name = "mnuExit";
-            mnuExit.Size = new Size(224, 26);
+            mnuExit.Size = new Size(183, 26);
             mnuExit.Text = "ปิดโปรแกรม ";
             mnuExit.Click += mnuExit_Click;
             // 
             // toolStripMenuItem3
             // 
             toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(221, 6);
+            toolStripMenuItem3.Size = new Size(180, 6);
             // 
             // mnuNomalF
             // 
             mnuNomalF.Name = "mnuNomalF";
-            mnuNomalF.Size = new Size(224, 26);
+            mnuNomalF.Size = new Size(183, 26);
             mnuNomalF.Text = "ปกติ";
             mnuNomalF.Click += mnuNomalF_Click;
             // 
             // mnuCloseF
             // 
             mnuCloseF.Name = "mnuCloseF";
-            mnuCloseF.Size = new Size(224, 26);
+            mnuCloseF.Size = new Size(183, 26);
             mnuCloseF.Text = "ปิดฟอร์ม";
             mnuCloseF.Click += mnuCloseF_Click;
             // 
             // mnuCloseAllF
             // 
             mnuCloseAllF.Name = "mnuCloseAllF";
-            mnuCloseAllF.Size = new Size(224, 26);
+            mnuCloseAllF.Size = new Size(183, 26);
             mnuCloseAllF.Text = "ปิดฟอร์มทั้งหมด";
             mnuCloseAllF.Click += mnuCloseAllF_Click;
             // 
@@ -145,14 +148,14 @@ namespace ZooManagement
             // mnuVertical
             // 
             mnuVertical.Name = "mnuVertical";
-            mnuVertical.Size = new Size(224, 26);
+            mnuVertical.Size = new Size(141, 26);
             mnuVertical.Text = "แนวตั้ง";
             mnuVertical.Click += mnuVertical_Click;
             // 
             // mnuHorizontal
             // 
             mnuHorizontal.Name = "mnuHorizontal";
-            mnuHorizontal.Size = new Size(224, 26);
+            mnuHorizontal.Size = new Size(141, 26);
             mnuHorizontal.Text = "แนวนอน";
             mnuHorizontal.Click += mnuHorizontal_Click;
             // 
@@ -161,7 +164,7 @@ namespace ZooManagement
             toolStrip1.BackColor = Color.FromArgb(240, 240, 255);
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolBtnAnimal, toolBtnAnimalType, toolBtnSpecies, toolBtnEnclosure, toolBtnKeeper, toolBtnFood, toolBtnFeeding, toolBtnRefresh, toolStripSeparator1, toolStripSearchText, toolStripSearchButton });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolBtnAnimal, toolBtnAnimalType, toolBtnSpecies, toolBtnEnclosure, toolBtnKeeper, toolBtnFood, toolBtnFeeding, toolBtnRefresh, toolStripSeparator1, toolStripSearchText, toolStripSearchButton, toolStripButton1 });
             toolStrip1.Location = new Point(0, 28);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(755, 29);
@@ -251,6 +254,22 @@ namespace ZooManagement
             toolStripSearchButton.Text = "ค้นหา";
             toolStripSearchButton.Click += ToolStripSearchButton_Click;
             // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(29, 24);
+            toolStripButton1.Text = "toolStripButton1";
+            // 
+            // รายงานToolStripMenuItem
+            // 
+            รายงานToolStripMenuItem.Name = "รายงานToolStripMenuItem";
+            รายงานToolStripMenuItem.Size = new Size(66, 24);
+            รายงานToolStripMenuItem.Text = "รายงาน";
+            รายงานToolStripMenuItem.Click += รายงานToolStripMenuItem_Click;
+            // 
             // MDIForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -300,5 +319,7 @@ namespace ZooManagement
         private ToolStripMenuItem mnuNomalF;
         private ToolStripMenuItem mnuCloseF;
         private ToolStripMenuItem mnuCloseAllF;
+        private ToolStripMenuItem รายงานToolStripMenuItem;
+        private ToolStripButton toolStripButton1;
     }
 }
