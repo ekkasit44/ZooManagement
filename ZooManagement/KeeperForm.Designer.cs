@@ -33,6 +33,7 @@ namespace ZooManagement
             comboEnclosure = new ComboBox();
             btnApply = new Button();
             btnClear = new Button();
+            btnEdit = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -81,18 +82,29 @@ namespace ZooManagement
             btnClear.UseVisualStyleBackColor = true;
             btnClear.Click += btnClear_Click;
             // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(1016, 494);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(94, 29);
+            btnEdit.TabIndex = 5;
+            btnEdit.Text = "เเก้ไข";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
+            // 
             // KeeperForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1272, 675);
+            Controls.Add(btnEdit);
             Controls.Add(btnClear);
             Controls.Add(btnApply);
             Controls.Add(comboEnclosure);
             Controls.Add(comboKeeper);
             Controls.Add(dataGridView1);
             Name = "KeeperForm";
-            Text = "KeeperForm";
+            Text = "ผู้ดูเเล";
             Load += KeeperForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -105,5 +117,6 @@ namespace ZooManagement
         private ComboBox comboEnclosure;
         private Button btnApply;
         private Button btnClear;
+        private Button btnEdit;
     }
 }
