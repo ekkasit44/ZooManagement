@@ -25,7 +25,7 @@
             // 
             lblName.Location = new Point(30, 30);
             lblName.Name = "lblName";
-            lblName.Size = new Size(100, 23);
+            lblName.Size = new Size(39, 23);
             lblName.TabIndex = 0;
             lblName.Text = "ชื่อ";
             // 
@@ -33,7 +33,7 @@
             // 
             lblLocation.Location = new Point(30, 80);
             lblLocation.Name = "lblLocation";
-            lblLocation.Size = new Size(100, 23);
+            lblLocation.Size = new Size(70, 23);
             lblLocation.TabIndex = 2;
             lblLocation.Text = "โซนที่ตั้ง";
             // 
@@ -55,23 +55,23 @@
             // 
             btnSave.Location = new Point(70, 140);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 23);
+            btnSave.Size = new Size(83, 32);
             btnSave.TabIndex = 4;
             btnSave.Text = "บันทึก";
             btnSave.Click += btnSave_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(200, 140);
+            btnCancel.Location = new Point(194, 140);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(75, 23);
+            btnCancel.Size = new Size(88, 32);
             btnCancel.TabIndex = 5;
             btnCancel.Text = "ยกเลิก";
             btnCancel.Click += btnCancel_Click;
             // 
             // EnclosureEditForm
             // 
-            ClientSize = new Size(362, 183);
+            ClientSize = new Size(426, 256);
             Controls.Add(lblName);
             Controls.Add(txtName);
             Controls.Add(lblLocation);

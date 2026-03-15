@@ -14,7 +14,7 @@ namespace ZooManagement
 
         // ตัวแปรเก็บ ID อื่นๆ
         private string selectedAnimalId = "";
-        private string selectedFeedingId = "";
+
 
         public EnclosureForm()
         {
@@ -31,7 +31,11 @@ namespace ZooManagement
         {
             using (SqlConnection conn = connectDB.ConnectZooDB())
             {
-                string query = "SELECT enclosure_id, name, location FROM Enclosure";
+                // ดึงข้อมูลกรงพร้อมจำนวนสัตว์ในแต่ละกรง
+                string query = @"SELECT e.enclosure_id, e.name, e.location, COUNT(a.animal_id) AS animal_count
+                                 FROM Enclosure e
+                                 LEFT JOIN Animal a ON e.enclosure_id = a.enclosure_id
+                                 GROUP BY e.enclosure_id, e.name, e.location";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -54,9 +58,8 @@ namespace ZooManagement
 
                 // โหลดสัตว์ และล้างตารางอาหารเพราะเพิ่งเปลี่ยนกรง
                 LoadAnimalsByEnclosure(selectedEnclosureId);
-                dgvFeeding.DataSource = null;
                 selectedAnimalId = "";
-                selectedFeedingId = "";
+
             }
         }
 
@@ -93,34 +96,6 @@ namespace ZooManagement
             if (e.RowIndex >= 0)
             {
                 selectedAnimalId = dgvAnimals.Rows[e.RowIndex].Cells["animal_id"].Value.ToString();
-                LoadFeedingSchedule(selectedAnimalId);
-            }
-        }
-
-        private void LoadFeedingSchedule(string animalId)
-        {
-            using (SqlConnection conn = connectDB.ConnectZooDB())
-            {
-                string query = @"SELECT fs.feeding_id, f.name AS food_name, fs.amount, fs.feeding_date, fs.feeding_time 
-                                 FROM FeedingSchedule fs
-                                 LEFT JOIN Food f ON fs.food_id = f.food_id
-                                 WHERE fs.animal_id = @animalId";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@animalId", animalId);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvFeeding.DataSource = dt;
-                SetFeedingGridHeaders();
-            }
-        }
-
-        private void dgvFeeding_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                selectedFeedingId = dgvFeeding.Rows[e.RowIndex].Cells["feeding_id"].Value.ToString();
             }
         }
 
@@ -205,14 +180,12 @@ namespace ZooManagement
             // โหลดข้อมูลทั้งหมดในทั้ง 3 ตาราง
             LoadEnclosures();
             LoadAllAnimals();
-            LoadAllFeeding();
 
             // เคลียร์ตัวแปรเลือกไว้เพื่อหลีกเลี่ยงการกระทำผิดพลาด
             selectedEnclosureId = "";
             selectedEnclosureName = "";
             selectedEnclosureLocation = "";
             selectedAnimalId = "";
-            selectedFeedingId = "";
         }
 
         private void LoadAllAnimals(string searchTerm = "")
@@ -241,29 +214,7 @@ namespace ZooManagement
 
         private void LoadAllFeeding(string searchTerm = "")
         {
-            using (SqlConnection conn = connectDB.ConnectZooDB())
-            {
-                string query = @"SELECT fs.feeding_id, f.name AS food_name, fs.amount, fs.feeding_date, fs.feeding_time, fs.animal_id
-                                 FROM FeedingSchedule fs
-                                 LEFT JOIN Food f ON fs.food_id = f.food_id";
-
-                if (!string.IsNullOrEmpty(searchTerm))
-                {
-                    query += " WHERE f.name LIKE @searchTerm OR fs.animal_id LIKE @searchTerm";
-                }
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (!string.IsNullOrEmpty(searchTerm))
-                {
-                    cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
-                }
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvFeeding.DataSource = dt;
-                SetFeedingGridHeaders();
-            }
+            // dgvFeeding removed - no implementation
         }
 
         // --- Helpers: ตั้งหัวคอลัมน์เป็นภาษาไทย ---
@@ -273,6 +224,7 @@ namespace ZooManagement
             if (dgvEnclosures.Columns.Contains("enclosure_id")) dgvEnclosures.Columns["enclosure_id"].HeaderText = "รหัสกรง";
             if (dgvEnclosures.Columns.Contains("name")) dgvEnclosures.Columns["name"].HeaderText = "ชื่อกรง";
             if (dgvEnclosures.Columns.Contains("location")) dgvEnclosures.Columns["location"].HeaderText = "สถานที่";
+            if (dgvEnclosures.Columns.Contains("animal_count")) dgvEnclosures.Columns["animal_count"].HeaderText = "จำนวนสัตว์";
         }
 
         private void SetAnimalGridHeaders()
@@ -284,15 +236,6 @@ namespace ZooManagement
             if (dgvAnimals.Columns.Contains("enclosure_id")) dgvAnimals.Columns["enclosure_id"].HeaderText = "รหัสกรง";
         }
 
-        private void SetFeedingGridHeaders()
-        {
-            if (dgvFeeding.Columns == null) return;
-            if (dgvFeeding.Columns.Contains("feeding_id")) dgvFeeding.Columns["feeding_id"].HeaderText = "รหัสให้อาหาร";
-            if (dgvFeeding.Columns.Contains("food_name")) dgvFeeding.Columns["food_name"].HeaderText = "อาหาร";
-            if (dgvFeeding.Columns.Contains("amount")) dgvFeeding.Columns["amount"].HeaderText = "ปริมาณ";
-            if (dgvFeeding.Columns.Contains("feeding_date")) dgvFeeding.Columns["feeding_date"].HeaderText = "วันที่";
-            if (dgvFeeding.Columns.Contains("feeding_time")) dgvFeeding.Columns["feeding_time"].HeaderText = "เวลา";
-            if (dgvFeeding.Columns.Contains("animal_id")) dgvFeeding.Columns["animal_id"].HeaderText = "รหัสสัตว์";
-        }
+        // Feeding grid removed - no header helper
     }
 }

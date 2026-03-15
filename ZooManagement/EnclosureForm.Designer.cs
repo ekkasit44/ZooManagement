@@ -7,7 +7,7 @@
         // ประกาศเครื่องมือ
         private System.Windows.Forms.DataGridView dgvEnclosures;
         private System.Windows.Forms.DataGridView dgvAnimals;
-        private System.Windows.Forms.DataGridView dgvFeeding;
+        // dgvFeeding removed
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnAdd;
@@ -15,7 +15,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label lblEnclosures;
         private System.Windows.Forms.Label lblAnimals;
-        private System.Windows.Forms.Label lblFeeding;
 
         protected override void Dispose(bool disposing)
         {
@@ -30,7 +29,7 @@
         {
             dgvEnclosures = new DataGridView();
             dgvAnimals = new DataGridView();
-            dgvFeeding = new DataGridView();
+            // dgvFeeding removed
             txtSearch = new TextBox();
             btnSearch = new Button();
             btnAdd = new Button();
@@ -38,11 +37,10 @@
             btnDelete = new Button();
             lblEnclosures = new Label();
             lblAnimals = new Label();
-            lblFeeding = new Label();
             lblAll = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvEnclosures).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvFeeding).BeginInit();
+            // dgvFeeding removed
             SuspendLayout();
             // 
             // dgvEnclosures
@@ -69,17 +67,7 @@
             dgvAnimals.TabIndex = 6;
             dgvAnimals.CellClick += dgvAnimals_CellClick;
             // 
-            // dgvFeeding
-            // 
-            dgvFeeding.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFeeding.Location = new Point(901, 100);
-            dgvFeeding.Name = "dgvFeeding";
-            dgvFeeding.ReadOnly = true;
-            dgvFeeding.RowHeadersWidth = 51;
-            dgvFeeding.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvFeeding.Size = new Size(400, 618);
-            dgvFeeding.TabIndex = 7;
-            dgvFeeding.CellClick += dgvFeeding_CellClick;
+            // dgvFeeding removed
             // 
             // txtSearch
             // 
@@ -144,12 +132,7 @@
             // 
             // lblFeeding
             // 
-            lblFeeding.AutoSize = true;
-            lblFeeding.Location = new Point(901, 77);
-            lblFeeding.Name = "lblFeeding";
-            lblFeeding.Size = new Size(109, 20);
-            lblFeeding.TabIndex = 2;
-            lblFeeding.Text = "3. ตารางให้อาหาร";
+            // lblFeeding removed
             // 
             // lblAll
             // 
@@ -167,12 +150,10 @@
             Controls.Add(lblAll);
             Controls.Add(lblEnclosures);
             Controls.Add(lblAnimals);
-            Controls.Add(lblFeeding);
             Controls.Add(dgvEnclosures);
             Controls.Add(txtSearch);
             Controls.Add(btnSearch);
             Controls.Add(dgvAnimals);
-            Controls.Add(dgvFeeding);
             Controls.Add(btnAdd);
             Controls.Add(btnEdit);
             Controls.Add(btnDelete);
@@ -181,7 +162,6 @@
             Load += EnclosureForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvEnclosures).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvFeeding).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

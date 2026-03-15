@@ -42,6 +42,7 @@
             dgvAnimal.RowHeadersWidth = 51;
             dgvAnimal.Size = new Size(914, 321);
             dgvAnimal.TabIndex = 0;
+            dgvAnimal.CellClick += dgvAnimal_CellClick;
             // 
             // btnAdd
             // 

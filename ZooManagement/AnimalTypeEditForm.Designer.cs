@@ -7,7 +7,7 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblDescription;
 
-        private System.Windows.Forms.TextBox txtTypeName;
+        private System.Windows.Forms.ComboBox cmbTypeName;
         private System.Windows.Forms.TextBox txtDescription;
 
         private System.Windows.Forms.Button btnSave;
@@ -26,10 +26,12 @@
         {
             lblName = new Label();
             lblDescription = new Label();
-            txtTypeName = new TextBox();
+            cmbTypeName = new ComboBox();
             txtDescription = new TextBox();
             btnSave = new Button();
             btnCancel = new Button();
+            cmbAnimal = new ComboBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // lblName
@@ -50,12 +52,12 @@
             lblDescription.TabIndex = 2;
             lblDescription.Text = "คำอธิบาย";
             // 
-            // txtTypeName
+            // cmbTypeName
             // 
-            txtTypeName.Location = new Point(150, 30);
-            txtTypeName.Name = "txtTypeName";
-            txtTypeName.Size = new Size(220, 27);
-            txtTypeName.TabIndex = 1;
+            cmbTypeName.Location = new Point(150, 30);
+            cmbTypeName.Name = "cmbTypeName";
+            cmbTypeName.Size = new Size(220, 28);
+            cmbTypeName.TabIndex = 1;
             // 
             // txtDescription
             // 
@@ -66,7 +68,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(80, 140);
+            btnSave.Location = new Point(92, 249);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(100, 35);
             btnSave.TabIndex = 4;
@@ -76,7 +78,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(220, 140);
+            btnCancel.Location = new Point(232, 249);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(100, 35);
             btnCancel.TabIndex = 5;
@@ -84,11 +86,30 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // cmbAnimal
+            // 
+            cmbAnimal.FormattingEnabled = true;
+            cmbAnimal.Location = new Point(150, 132);
+            cmbAnimal.Name = "cmbAnimal";
+            cmbAnimal.Size = new Size(220, 28);
+            cmbAnimal.TabIndex = 6;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(33, 140);
+            label1.Name = "label1";
+            label1.Size = new Size(62, 20);
+            label1.TabIndex = 7;
+            label1.Text = "เลือกสัตว์";
+            // 
             // AnimalTypeEditForm
             // 
-            ClientSize = new Size(420, 220);
+            ClientSize = new Size(457, 311);
+            Controls.Add(label1);
+            Controls.Add(cmbAnimal);
             Controls.Add(lblName);
-            Controls.Add(txtTypeName);
+            Controls.Add(cmbTypeName);
             Controls.Add(lblDescription);
             Controls.Add(txtDescription);
             Controls.Add(btnSave);
@@ -98,5 +119,8 @@
             ResumeLayout(false);
             PerformLayout();
         }
+
+        private ComboBox cmbAnimal;
+        private Label label1;
     }
 }

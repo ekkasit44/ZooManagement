@@ -50,6 +50,7 @@
             cmbSpecies = new ComboBox();
             btnSave = new Button();
             btnCancel = new Button();
+            label4 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -133,7 +134,7 @@
             // 
             // lblType
             // 
-            lblType.Location = new Point(30, 241);
+            lblType.Location = new Point(30, 291);
             lblType.Name = "lblType";
             lblType.Size = new Size(55, 23);
             lblType.TabIndex = 12;
@@ -157,8 +158,9 @@
             // 
             cmbSpecies.Location = new Point(150, 291);
             cmbSpecies.Name = "cmbSpecies";
-            cmbSpecies.Size = new Size(121, 28);
+            cmbSpecies.Size = new Size(223, 28);
             cmbSpecies.TabIndex = 15;
+            cmbSpecies.DropDownStyle = ComboBoxStyle.DropDown; // allow typing new species name
             // 
             // btnSave
             // 
@@ -178,9 +180,18 @@
             btnCancel.Text = "ยกเลิก";
             btnCancel.Click += btnCancel_Click;
             // 
+            // label4
+            // 
+            label4.Location = new Point(30, 241);
+            label4.Name = "label4";
+            label4.Size = new Size(55, 23);
+            label4.TabIndex = 16;
+            label4.Text = "ประเภท";
+            // 
             // AnimalEditForm
             // 
             ClientSize = new Size(590, 554);
+            Controls.Add(label4);
             Controls.Add(label1);
             Controls.Add(txtName);
             Controls.Add(label2);
@@ -204,6 +215,6 @@
             PerformLayout();
         }
 
-
+        private Label label4;
     }
 }

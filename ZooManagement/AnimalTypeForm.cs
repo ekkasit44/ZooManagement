@@ -29,65 +29,53 @@ namespace ZooManagement
         }
 
         // โหลดข้อมูลจากฐานข้อมูล
-        private void LoadAnimalType()
+        public void LoadAnimalType()
         {
             using (SqlConnection conn = connectDB.ConnectZooDB())
             {
-                string sql = @"SELECT 
-        at.animal_type_id AS รหัสประเภท,
-        at.type_name AS ประเภทสัตว์,
-        at.description AS รายละเอียด,
-        COUNT(a.animal_id) AS จำนวนสัตว์
-
-        FROM AnimalType at
-
-        LEFT JOIN Animal a
-        ON at.animal_type_id = a.animal_type_id
-
-        GROUP BY
-        at.animal_type_id,
-        at.type_name,
-        at.description";
+                string sql = @"
+            SELECT 
+                at.animal_type_id AS รหัสประเภท,
+                at.type_name AS ประเภทสัตว์,
+                at.description AS รายละเอียด,
+                COUNT(a.animal_id) AS จำนวนสัตว์
+            FROM AnimalType at
+            LEFT JOIN Animal a ON at.animal_type_id = a.animal_type_id
+            GROUP BY at.animal_type_id, at.type_name, at.description";
 
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-
-                dtAnimalType.Clear();
-                da.Fill(dtAnimalType);
-
-                dgvAnimalType.DataSource = dtAnimalType;
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvAnimalType.DataSource = dt;
             }
         }
 
 
-        private void LoadAnimalByType(int typeID)
+
+        public void LoadAnimalByType(int typeId)
         {
             using (SqlConnection conn = connectDB.ConnectZooDB())
             {
-                string sql = @"SELECT 
-        a.name AS ชื่อสัตว์,
-        s.common_name AS ชนิด,
-        e.name AS กรง
+                string sql = @"
+            SELECT 
+                a.name AS ชื่อสัตว์,
+                s.common_name AS ชนิด,
+                e.name AS กรง
+            FROM Animal a
+            LEFT JOIN SpeciesInfo s ON a.species_info_id = s.species_info_id
+            LEFT JOIN Enclosure e ON a.enclosure_id = e.enclosure_id
+            WHERE a.animal_type_id = @tid";
 
-        FROM Animal a
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@tid", typeId);
 
-        JOIN SpeciesInfo s
-        ON a.species_info_id = s.species_info_id
-
-        JOIN Enclosure e
-        ON a.enclosure_id = e.enclosure_id
-
-        WHERE a.animal_type_id = @typeID";
-
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-
-                da.SelectCommand.Parameters.AddWithValue("@typeID", typeID);
-
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-
                 dgvAnimalList.DataSource = dt;
             }
         }
+
 
         private void dgvAnimalType_SelectionChanged(object sender, EventArgs e)
         {

@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using ZooManagement;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZooManagement
 {
@@ -14,6 +15,16 @@ namespace ZooManagement
         public AnimalEditForm()
         {
             InitializeComponent();
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbType.SelectedValue == null) return;
+                LoadSpecies(cmbType.SelectedValue);
+            }
+            catch { }
         }
 
         // เรียกก่อนแสดงฟอร์ม เพื่อโหลดข้อมูลสัตว์ที่ต้องการแก้ไข
@@ -97,57 +108,61 @@ namespace ZooManagement
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", animalId);
 
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    txtName.Text = reader["name"].ToString();
-                    cbGender.Text = reader["gender"].ToString();
-                    dtBirth.Value = Convert.ToDateTime(reader["birth_date"]);
-                    // ตั้งค่า enclosure ถ้ามี
-                    if (reader["enclosure_id"] != DBNull.Value)
+                    if (reader.Read())
                     {
-                        var eid = reader["enclosure_id"].ToString();
-                        if (cmbEnclosure.DataSource != null)
-                            cmbEnclosure.SelectedValue = eid;
+                        // Read values into locals while reader is open
+                        var name = reader["name"] == DBNull.Value ? string.Empty : reader["name"].ToString();
+                        var gender = reader["gender"] == DBNull.Value ? string.Empty : reader["gender"].ToString();
+                        DateTime birth = reader["birth_date"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(reader["birth_date"]);
+                        string eid = reader["enclosure_id"] == DBNull.Value ? null : reader["enclosure_id"].ToString();
+                        string typeId = reader["animal_type_id"] == DBNull.Value ? null : reader["animal_type_id"].ToString();
+                        string speciesId = reader["species_info_id"] == DBNull.Value ? null : reader["species_info_id"].ToString();
 
-                        // ตั้งค่า keeper ตาม EnclosureKeeper
-                        try
+                        // set basic controls
+                        txtName.Text = name;
+                        cbGender.Text = gender;
+                        if (birth != DateTime.MinValue) dtBirth.Value = birth;
+
+                        // set enclosure if available
+                        if (!string.IsNullOrEmpty(eid) && cmbEnclosure.DataSource != null)
                         {
-                            reader.Close();
-                            using (SqlCommand cmd2 = new SqlCommand("SELECT keeper_id FROM EnclosureKeeper WHERE enclosure_id=@eid", conn))
-                            {
-                                cmd2.Parameters.AddWithValue("@eid", eid);
-                                var val = cmd2.ExecuteScalar();
-                                if (val != null && val != DBNull.Value && cmbKeeper.DataSource != null)
-                                {
-                                    cmbKeeper.SelectedValue = val.ToString();
-                                }
-                            }
-                            // ตั้งค่าประเภทและชนิดจากข้อมูลสัตว์
+                            try { cmbEnclosure.SelectedValue = eid; } catch { }
+                        }
+
+                        // set keeper from EnclosureKeeper (if enclosure present)
+                        if (!string.IsNullOrEmpty(eid) && cmbKeeper.DataSource != null)
+                        {
                             try
                             {
-                                if (reader["animal_type_id"] != DBNull.Value)
+                                using (SqlCommand cmd2 = new SqlCommand("SELECT keeper_id FROM EnclosureKeeper WHERE enclosure_id=@eid", conn))
                                 {
-                                    var tid = reader["animal_type_id"].ToString();
-                                    if (cmbType.DataSource != null) cmbType.SelectedValue = tid;
-                                    // โหลดเฉพาะชนิดของประเภทนี้
-                                    LoadSpecies(tid);
-                                }
-
-                                if (reader["species_info_id"] != DBNull.Value)
-                                {
-                                    var sid = reader["species_info_id"].ToString();
-                                    if (cmbSpecies.DataSource != null) cmbSpecies.SelectedValue = sid;
+                                    cmd2.Parameters.AddWithValue("@eid", eid);
+                                    var val = cmd2.ExecuteScalar();
+                                    if (val != null && val != DBNull.Value)
+                                    {
+                                        try { cmbKeeper.SelectedValue = val.ToString(); } catch { }
+                                    }
                                 }
                             }
                             catch { }
                         }
-                        catch { }
+
+                        // Set type and species
+                        if (!string.IsNullOrEmpty(typeId) && cmbType.DataSource != null)
+                        {
+                            try { cmbType.SelectedValue = typeId; } catch { }
+                            // load species for that type
+                            try { LoadSpecies(typeId); } catch { }
+                        }
+
+                        if (!string.IsNullOrEmpty(speciesId) && cmbSpecies.DataSource != null)
+                        {
+                            try { cmbSpecies.SelectedValue = speciesId; } catch { }
+                        }
                     }
                 }
-
-                reader.Close();
             }
         }
 
@@ -212,58 +227,72 @@ namespace ZooManagement
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = connectDB.ConnectZooDB())
+            try
             {
-                SqlCommand cmd;
+                // 1. หาค่าต่างๆ เตรียมไว้ก่อน
+                int newTypeID = GetTypeID(cmbType.Text);
 
-                if (animalId == 0)
+                // ถ้า GetTypeID ส่งคืน 0 (ไม่ได้พิมพ์อะไร) ให้เซ็ตเป็น DBNull ถ้ามี ID ให้ใช้ค่านั้น
+                object typeVal = newTypeID == 0 ? DBNull.Value : (object)newTypeID;
+
+                // เติมบรรทัดนี้กลับเข้าไปครับ! 👇
+                object enclosureVal = cmbEnclosure.SelectedValue ?? DBNull.Value;
+
+                // ส่ง typeVal เข้าไปใน GetSpeciesID ด้วย เพื่อให้อัปเดตตาราง SpeciesInfo
+                int speciesID = GetSpeciesID(cmbSpecies.Text);
+
+                using (SqlConnection conn = connectDB.ConnectZooDB())
                 {
-                    string sql = "INSERT INTO Animal(name,gender,birth_date,enclosure_id) VALUES(@name,@gender,@birth,@enclosure); SELECT SCOPE_IDENTITY();";
-                    cmd = new SqlCommand(sql, conn);
-                }
-                else
-                {
-                    string sql = "UPDATE Animal SET name=@name,gender=@gender,birth_date=@birth,enclosure_id=@enclosure WHERE animal_id=@id";
+                    SqlCommand cmd;
 
-                    cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@id", animalId);
-                }
-
-                cmd.Parameters.AddWithValue("@name", txtName.Text);
-                cmd.Parameters.AddWithValue("@gender", cbGender.Text);
-                cmd.Parameters.AddWithValue("@birth", dtBirth.Value);
-
-                object enclosureVal = DBNull.Value;
-                if (cmbEnclosure != null && cmbEnclosure.SelectedValue != null)
-                    enclosureVal = cmbEnclosure.SelectedValue;
-
-                cmd.Parameters.AddWithValue("@enclosure", enclosureVal ?? DBNull.Value);
-
-                if (animalId == 0)
-                {
-                    // INSERT and get new id
-                    var res = cmd.ExecuteScalar();
-                    if (res != null && res != DBNull.Value)
+                    // 2. แยกระหว่าง Insert (เพิ่ม) และ Update (แก้ไข) รวบคำสั่งทีเดียวจบ!
+                    if (animalId == 0)
                     {
-                        animalId = Convert.ToInt32(Convert.ToDecimal(res));
+                        // โหมดเพิ่มข้อมูลใหม่
+                        string sql = @"INSERT INTO Animal(name, gender, birth_date, enclosure_id, species_info_id, animal_type_id) 
+                               VALUES(@name, @gender, @birth, @enclosure, @species, @type); 
+                               SELECT SCOPE_IDENTITY();";
+                        cmd = new SqlCommand(sql, conn);
                     }
-                }
-                else
-                {
-                    cmd.ExecuteNonQuery();
-                }
+                    else
+                    {
+                        // โหมดแก้ไขข้อมูล
+                        string sql = @"UPDATE Animal 
+                               SET name=@name, gender=@gender, birth_date=@birth, 
+                                   enclosure_id=@enclosure, species_info_id=@species, animal_type_id=@type 
+                               WHERE animal_id=@id";
+                        cmd = new SqlCommand(sql, conn);
+                        cmd.Parameters.AddWithValue("@id", animalId);
+                    }
 
-                // Update EnclosureKeeper mapping for selected enclosure
-                try
-                {
+                    // 3. แนบค่าตัวแปรทั้งหมด (ใช้ชุดเดียวกันได้เลย)
+                    cmd.Parameters.AddWithValue("@name", txtName.Text);
+                    cmd.Parameters.AddWithValue("@gender", cbGender.Text);
+                    cmd.Parameters.AddWithValue("@birth", dtBirth.Value);
+                    cmd.Parameters.AddWithValue("@enclosure", enclosureVal);
+                    cmd.Parameters.AddWithValue("@species", speciesID);
+                    cmd.Parameters.AddWithValue("@type", typeVal);
+
+                    // 4. สั่งรันคำสั่ง SQL
+                    if (animalId == 0)
+                    {
+                        var res = cmd.ExecuteScalar();
+                        if (res != null && res != DBNull.Value)
+                        {
+                            animalId = Convert.ToInt32(Convert.ToDecimal(res));
+                        }
+                    }
+                    else
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // 5. อัปเดตข้อมูลผู้ดูแล (EnclosureKeeper) ยังคงใช้ลอจิกเดิมของคุณครับ
                     if (enclosureVal != DBNull.Value)
                     {
                         var enclId = enclosureVal.ToString();
-                        object keeperVal = DBNull.Value;
-                        if (cmbKeeper != null && cmbKeeper.SelectedValue != null)
-                            keeperVal = cmbKeeper.SelectedValue;
+                        object keeperVal = cmbKeeper.SelectedValue ?? DBNull.Value;
 
-                        // check existing mapping
                         using (SqlCommand cmdChk = new SqlCommand("SELECT COUNT(*) FROM EnclosureKeeper WHERE enclosure_id=@eid", conn))
                         {
                             cmdChk.Parameters.AddWithValue("@eid", enclId);
@@ -272,7 +301,7 @@ namespace ZooManagement
                             {
                                 using (SqlCommand cmdUpd = new SqlCommand("UPDATE EnclosureKeeper SET keeper_id=@kid WHERE enclosure_id=@eid", conn))
                                 {
-                                    cmdUpd.Parameters.AddWithValue("@kid", keeperVal ?? DBNull.Value);
+                                    cmdUpd.Parameters.AddWithValue("@kid", keeperVal);
                                     cmdUpd.Parameters.AddWithValue("@eid", enclId);
                                     cmdUpd.ExecuteNonQuery();
                                 }
@@ -282,34 +311,79 @@ namespace ZooManagement
                                 using (SqlCommand cmdIns = new SqlCommand("INSERT INTO EnclosureKeeper(enclosure_id, keeper_id) VALUES(@eid,@kid)", conn))
                                 {
                                     cmdIns.Parameters.AddWithValue("@eid", enclId);
-                                    cmdIns.Parameters.AddWithValue("@kid", keeperVal ?? DBNull.Value);
+                                    cmdIns.Parameters.AddWithValue("@kid", keeperVal);
                                     cmdIns.ExecuteNonQuery();
                                 }
                             }
                         }
                     }
                 }
-                catch { }
 
-                // Update animal's species and type if available
-                try
-                {
-                    if (cmbSpecies != null && cmbSpecies.SelectedValue != null)
-                    {
-                        using (SqlCommand cmdSp = new SqlCommand("UPDATE Animal SET species_info_id=@sid, animal_type_id=@tid WHERE animal_id=@aid", conn))
-                        {
-                            cmdSp.Parameters.AddWithValue("@sid", cmbSpecies.SelectedValue);
-                            cmdSp.Parameters.AddWithValue("@tid", cmbType != null && cmbType.SelectedValue != null ? cmbType.SelectedValue : (object)DBNull.Value);
-                            cmdSp.Parameters.AddWithValue("@aid", animalId);
-                            cmdSp.ExecuteNonQuery();
-                        }
-                    }
-                }
-                catch { }
+                MessageBox.Show("บันทึกข้อมูลสำเร็จ!");
+                try { DataEvents.RaiseAnimalsChanged(); } catch { }
+                this.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("เกิดข้อผิดพลาด: " + ex.Message);
+            }
+        }
 
-            MessageBox.Show("Saved Successfully");
-            this.Close();
+        // เปลี่ยนให้รับค่า typeId เข้ามาด้วย
+        private int GetSpeciesID(string speciesName)
+        {
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                string checkSQL = "SELECT species_info_id FROM SpeciesInfo WHERE common_name=@name";
+
+                SqlCommand checkCmd = new SqlCommand(checkSQL, conn);
+                checkCmd.Parameters.AddWithValue("@name", speciesName);
+
+                object result = checkCmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    return Convert.ToInt32(result);
+                }
+
+                string insertSQL = @"INSERT INTO SpeciesInfo(common_name) OUTPUT INSERTED.species_info_id VALUES(@name)";
+
+                SqlCommand insertCmd = new SqlCommand(insertSQL, conn);
+                insertCmd.Parameters.AddWithValue("@name", speciesName);
+
+                return (int)insertCmd.ExecuteScalar();
+            }
+        }
+
+        private int GetTypeID(string typeName)
+        {
+            // ถ้าไม่ได้พิมพ์อะไรเลย ให้ส่งค่า 0 กลับไป
+            if (string.IsNullOrWhiteSpace(typeName)) return 0;
+
+            using (SqlConnection conn = connectDB.ConnectZooDB())
+            {
+                // 1. เช็คว่ามีประเภทสัตว์ชื่อนี้ในตาราง AnimalType หรือยัง
+                string checkSQL = "SELECT animal_type_id FROM AnimalType WHERE type_name=@name";
+                SqlCommand checkCmd = new SqlCommand(checkSQL, conn);
+                checkCmd.Parameters.AddWithValue("@name", typeName.Trim());
+
+                object result = checkCmd.ExecuteScalar();
+
+                // ถ้ามีแล้ว ให้เอา ID เดิมมาใช้
+                if (result != null)
+                {
+                    return Convert.ToInt32(result);
+                }
+
+                // 2. ถ้ายังไม่มี ให้ Insert เข้าไปใหม่ แล้วดึง ID ใหม่กลับมา
+                string insertSQL = @"INSERT INTO AnimalType(type_name) 
+                             OUTPUT INSERTED.animal_type_id 
+                             VALUES(@name)";
+                SqlCommand insertCmd = new SqlCommand(insertSQL, conn);
+                insertCmd.Parameters.AddWithValue("@name", typeName.Trim());
+
+                return (int)insertCmd.ExecuteScalar();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
