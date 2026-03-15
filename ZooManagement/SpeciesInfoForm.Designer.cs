@@ -2,94 +2,108 @@ namespace ZooManagement
 {
     partial class SpeciesInfoForm
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        private System.Windows.Forms.DataGridView dgvSpecies;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtSearch;
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
-            dgvSpecies = new DataGridView();
-            btnAdd = new Button();
-            btnEdit = new Button();
-            btnDelete = new Button();
-            btnSearch = new Button();
-            txtSearch = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)dgvSpecies).BeginInit();
+            dataGridView1 = new DataGridView();
+            comboSpecies = new ComboBox();
+            comboType = new ComboBox();
+            btnApply = new Button();
+            btnClear = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // dgvSpecies
+            // dataGridView1
             // 
-            dgvSpecies.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvSpecies.ColumnHeadersHeight = 29;
-            dgvSpecies.Location = new Point(12, 100);
-            dgvSpecies.Name = "dgvSpecies";
-            dgvSpecies.RowHeadersWidth = 51;
-            dgvSpecies.Size = new Size(776, 308);
-            dgvSpecies.TabIndex = 0;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(86, 27);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(1056, 458);
+            dataGridView1.TabIndex = 0;
             // 
-            // btnAdd
+            // comboSpecies
             // 
-            btnAdd.Location = new Point(23, 50);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(80, 30);
-            btnAdd.TabIndex = 3;
-            btnAdd.Text = "เพิ่ม";
-            btnAdd.Click += btnAdd_Click;
+            comboSpecies.FormattingEnabled = true;
+            comboSpecies.Location = new Point(86, 536);
+            comboSpecies.Name = "comboSpecies";
+            comboSpecies.Size = new Size(197, 28);
+            comboSpecies.TabIndex = 1;
             // 
-            // btnEdit
+            // comboType
             // 
-            btnEdit.Location = new Point(111, 50);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(80, 30);
-            btnEdit.TabIndex = 4;
-            btnEdit.Text = "แก้ไข";
-            btnEdit.Click += btnEdit_Click;
+            comboType.FormattingEnabled = true;
+            comboType.Location = new Point(341, 536);
+            comboType.Name = "comboType";
+            comboType.Size = new Size(198, 28);
+            comboType.TabIndex = 2;
             // 
-            // btnDelete
+            // btnApply
             // 
-            btnDelete.Location = new Point(201, 50);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(80, 30);
-            btnDelete.TabIndex = 5;
-            btnDelete.Text = "ลบ";
-            btnDelete.Click += btnDelete_Click;
+            btnApply.Location = new Point(596, 536);
+            btnApply.Name = "btnApply";
+            btnApply.Size = new Size(94, 29);
+            btnApply.TabIndex = 3;
+            btnApply.Text = "ค้นหา";
+            btnApply.UseVisualStyleBackColor = true;
+            btnApply.Click += btnApply_Click;
             // 
-            // btnSearch
+            // btnClear
             // 
-            btnSearch.Location = new Point(231, 8);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(80, 25);
-            btnSearch.TabIndex = 2;
-            btnSearch.Text = "ค้นหา";
-            btnSearch.Click += btnSearch_Click;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(23, 10);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(200, 27);
-            txtSearch.TabIndex = 1;
+            btnClear.Location = new Point(741, 536);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(103, 29);
+            btnClear.TabIndex = 4;
+            btnClear.Text = "เคลียร์";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // SpeciesInfoForm
             // 
-            ClientSize = new Size(800, 420);
-            Controls.Add(dgvSpecies);
-            Controls.Add(txtSearch);
-            Controls.Add(btnSearch);
-            Controls.Add(btnAdd);
-            Controls.Add(btnEdit);
-            Controls.Add(btnDelete);
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1235, 684);
+            Controls.Add(btnClear);
+            Controls.Add(btnApply);
+            Controls.Add(comboType);
+            Controls.Add(comboSpecies);
+            Controls.Add(dataGridView1);
             Name = "SpeciesInfoForm";
-            Text = "จัดการข้อมูลชนิดสัตว์";
+            Text = "SpeciesInfoForm";
             Load += SpeciesInfoForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvSpecies).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
+
+        #endregion
+
+        private DataGridView dataGridView1;
+        private ComboBox comboSpecies;
+        private ComboBox comboType;
+        private Button btnApply;
+        private Button btnClear;
     }
 }
