@@ -43,6 +43,7 @@ namespace ZooManagement
             mnuArrangeF = new ToolStripMenuItem();
             mnuVertical = new ToolStripMenuItem();
             mnuHorizontal = new ToolStripMenuItem();
+            รายงานToolStripMenuItem = new ToolStripMenuItem();
             toolStrip1 = new ToolStrip();
             toolBtnAnimal = new ToolStripButton();
             toolBtnAnimalType = new ToolStripButton();
@@ -56,7 +57,6 @@ namespace ZooManagement
             toolStripSearchText = new ToolStripTextBox();
             toolStripSearchButton = new ToolStripButton();
             toolStripButton1 = new ToolStripButton();
-            รายงานToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -67,7 +67,7 @@ namespace ZooManagement
             menuStrip1.Items.AddRange(new ToolStripItem[] { mnuF, mnuArrangeF, รายงานToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(755, 28);
+            menuStrip1.Size = new Size(1138, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             menuStrip1.ItemClicked += menuStrip1_ItemClicked;
@@ -159,6 +159,13 @@ namespace ZooManagement
             mnuHorizontal.Text = "แนวนอน";
             mnuHorizontal.Click += mnuHorizontal_Click;
             // 
+            // รายงานToolStripMenuItem
+            // 
+            รายงานToolStripMenuItem.Name = "รายงานToolStripMenuItem";
+            รายงานToolStripMenuItem.Size = new Size(66, 24);
+            รายงานToolStripMenuItem.Text = "รายงาน";
+            รายงานToolStripMenuItem.Click += รายงานToolStripMenuItem_Click;
+            // 
             // toolStrip1
             // 
             toolStrip1.BackColor = Color.FromArgb(240, 240, 255);
@@ -167,14 +174,14 @@ namespace ZooManagement
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolBtnAnimal, toolBtnAnimalType, toolBtnSpecies, toolBtnEnclosure, toolBtnKeeper, toolBtnFood, toolBtnFeeding, toolBtnRefresh, toolStripSeparator1, toolStripSearchText, toolStripSearchButton, toolStripButton1 });
             toolStrip1.Location = new Point(0, 28);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(755, 29);
+            toolStrip1.Size = new Size(1138, 27);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
             // toolBtnAnimal
             // 
             toolBtnAnimal.Name = "toolBtnAnimal";
-            toolBtnAnimal.Size = new Size(37, 26);
+            toolBtnAnimal.Size = new Size(37, 24);
             toolBtnAnimal.Text = "สัตว์";
             toolBtnAnimal.ToolTipText = "เปิดหน้าข้อมูลสัตว์";
             toolBtnAnimal.Click += toolBtnAnimal_Click;
@@ -182,7 +189,7 @@ namespace ZooManagement
             // toolBtnAnimalType
             // 
             toolBtnAnimalType.Name = "toolBtnAnimalType";
-            toolBtnAnimalType.Size = new Size(55, 26);
+            toolBtnAnimalType.Size = new Size(55, 24);
             toolBtnAnimalType.Text = "ประเภท";
             toolBtnAnimalType.ToolTipText = "เปิดหน้าประเภทสัตว์";
             toolBtnAnimalType.Click += toolBtnAnimalType_Click;
@@ -190,7 +197,7 @@ namespace ZooManagement
             // toolBtnSpecies
             // 
             toolBtnSpecies.Name = "toolBtnSpecies";
-            toolBtnSpecies.Size = new Size(67, 26);
+            toolBtnSpecies.Size = new Size(67, 24);
             toolBtnSpecies.Text = "ชนิดพันธุ์";
             toolBtnSpecies.ToolTipText = "เปิดหน้าชนิดพันธุ์";
             toolBtnSpecies.Click += toolBtnSpecies_Click;
@@ -198,7 +205,7 @@ namespace ZooManagement
             // toolBtnEnclosure
             // 
             toolBtnEnclosure.Name = "toolBtnEnclosure";
-            toolBtnEnclosure.Size = new Size(34, 26);
+            toolBtnEnclosure.Size = new Size(34, 24);
             toolBtnEnclosure.Text = "กรง";
             toolBtnEnclosure.ToolTipText = "เปิดหน้ากรงสัตว์";
             toolBtnEnclosure.Click += toolBtnEnclosure_Click;
@@ -206,7 +213,7 @@ namespace ZooManagement
             // toolBtnKeeper
             // 
             toolBtnKeeper.Name = "toolBtnKeeper";
-            toolBtnKeeper.Size = new Size(46, 26);
+            toolBtnKeeper.Size = new Size(46, 24);
             toolBtnKeeper.Text = "ผู้ดูแล";
             toolBtnKeeper.ToolTipText = "เปิดหน้าผู้ดูแล";
             toolBtnKeeper.Click += toolBtnKeeper_Click;
@@ -214,7 +221,7 @@ namespace ZooManagement
             // toolBtnFood
             // 
             toolBtnFood.Name = "toolBtnFood";
-            toolBtnFood.Size = new Size(50, 26);
+            toolBtnFood.Size = new Size(50, 24);
             toolBtnFood.Text = "อาหาร";
             toolBtnFood.ToolTipText = "เปิดหน้าข้อมูลอาหาร";
             toolBtnFood.Click += toolBtnFood_Click;
@@ -222,7 +229,7 @@ namespace ZooManagement
             // toolBtnFeeding
             // 
             toolBtnFeeding.Name = "toolBtnFeeding";
-            toolBtnFeeding.Size = new Size(91, 26);
+            toolBtnFeeding.Size = new Size(91, 24);
             toolBtnFeeding.Text = "เวลาให้อาหาร";
             toolBtnFeeding.ToolTipText = "เปิดหน้าตารางเวลาให้อาหาร";
             toolBtnFeeding.Click += toolBtnFeeding_Click;
@@ -230,7 +237,7 @@ namespace ZooManagement
             // toolBtnRefresh
             // 
             toolBtnRefresh.Name = "toolBtnRefresh";
-            toolBtnRefresh.Size = new Size(48, 26);
+            toolBtnRefresh.Size = new Size(48, 24);
             toolBtnRefresh.Text = "รีเฟรช";
             toolBtnRefresh.ToolTipText = "รีเฟรชข้อมูลของฟอร์มที่เปิดอยู่";
             toolBtnRefresh.Click += toolBtnRefresh_Click;
@@ -238,7 +245,7 @@ namespace ZooManagement
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 29);
+            toolStripSeparator1.Size = new Size(6, 27);
             // 
             // toolStripSearchText
             // 
@@ -263,18 +270,11 @@ namespace ZooManagement
             toolStripButton1.Size = new Size(29, 24);
             toolStripButton1.Text = "toolStripButton1";
             // 
-            // รายงานToolStripMenuItem
-            // 
-            รายงานToolStripMenuItem.Name = "รายงานToolStripMenuItem";
-            รายงานToolStripMenuItem.Size = new Size(66, 24);
-            รายงานToolStripMenuItem.Text = "รายงาน";
-            รายงานToolStripMenuItem.Click += รายงานToolStripMenuItem_Click;
-            // 
             // MDIForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(755, 493);
+            ClientSize = new Size(1138, 749);
             Controls.Add(toolStrip1);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;

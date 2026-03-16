@@ -155,9 +155,9 @@ namespace ZooManagement
             id.AutoSize = true;
             id.Location = new Point(69, 99);
             id.Name = "id";
-            id.Size = new Size(32, 20);
+            id.Size = new Size(86, 20);
             id.TabIndex = 15;
-            id.Text = "รหัส";
+            id.Text = "รหัสชนิดพันธ์";
             // 
             // xvx
             // 
